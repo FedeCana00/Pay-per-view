@@ -1,4 +1,5 @@
 import React from "react";
+import Home from "./components/home/Home";
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -12,6 +13,7 @@ function App() {
   return (
     <div className="App">
       <p>{!data ? "Loading..." : data}</p>
+      <Home />
     </div>
   );
 }
