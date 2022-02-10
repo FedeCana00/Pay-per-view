@@ -1,20 +1,21 @@
 import React from "react";
 import Home from "./components/home/Home";
+import Access from "./components/access/Access";
+import Navbar from "./components/navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
 
   return (
-    <div className="App">
-      <p>{!data ? "Loading..." : data}</p>
-      <Home />
-    </div>
+    <BrowserRouter>
+      <Routes>
+          <Route path="/" element={<Navbar />}>
+            <Route index element={<Home />} />
+            <Route path="/access" element={<Access />}>
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
