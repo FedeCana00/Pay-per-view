@@ -8,11 +8,18 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: "Sql1182390",
-  host: "89.46.111.59",
+  user: "fdsa959shf",
+  host: "212.237.39.62",
   port: 3306,
-  password: "m774w78080",
-  database: "Sql1182390_2",
+  password: "jzr_uer6KJZ@hmh5jye",
+  database: "tg57srdjbq",
+});
+
+db.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ', err);
+    return;
+  }
 });
 
 // insert into persona
