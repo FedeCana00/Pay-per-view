@@ -9,16 +9,6 @@
   position: fixed;
   top: 0;
   z-index: 3;
-  animation: topbar-animation 1s ease-in;
-
-  @keyframes topbar-animation {
-    0%{
-      transform: translateY(-300px);
-    }
-    100%{
-      transform: translateY(0);
-    }
-  }
 
   .wrapper {
     padding: 10px 30px;
@@ -76,24 +66,6 @@
         @include web{
             display: none;
         }
-
-      .hamburger {
-        width: 32px;
-        height: 25px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        cursor: pointer;
-        overflow: hidden;
-
-        span {
-          width: 100%;
-          height: 3px;
-          background-color: white;
-          transform-origin: left;
-          transition: all 2s ease;
-        }
-      }
     }
 
     .center{
@@ -130,27 +102,6 @@
         @include mobile{
             display: none;
         }
-    }
-  }
-
-  &.active {
-    background-color: white;
-    color: white;
-
-    .hamburger {
-      span {
-        &:first-child {
-          background-color: white;
-          transform: rotate(45deg);
-        }
-        &:nth-child(2) {
-          opacity: 0;
-        }
-        &:last-child {
-          background-color: white;
-          transform: rotate(-45deg);
-        }
-      }
     }
   }
 }

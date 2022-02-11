@@ -2,6 +2,8 @@ import "./access.scss"
 import { useState } from "react";
 import axios from "axios";
 import { sha512 } from "js-sha512";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 export default function Access() {
     const [name, setName] = useState("");
@@ -11,8 +13,17 @@ export default function Access() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    // used to show error message
+    const [errorMsg, setErrorMsg] = useState("");
+    // used to show success message
+    const [successMsg, setSuccessMsg] = useState("");
+
     const signUp = () => {
-        console.log(password)
+        // check if fields are filled right
+        if(checkFields())
+            return;
+
+        // post request
         axios.post("http://localhost:3001/createPerson", {
             name: name,
             surname: surname,
@@ -23,6 +34,11 @@ export default function Access() {
         }).then(() => {
             console.log("Sign up successfully!");
         });
+
+        successMsg("Registration was successful!");
+
+        // reset success message after 5 seconds
+        setTimeout(() => setSuccessMsg(""), 5000);
     };
 
     // remove "-" and convert to integer
@@ -30,35 +46,79 @@ export default function Access() {
         return parseInt(date.replaceAll("-", ""));
     }
 
+    // check fields before insert into database
+    function checkFields(){
+        setErrorMsg("");
+        let msg = "";
+        
+        if(name.length <= 0)
+            msg += "Name is empty! \n";
+        if(surname.length <= 0)
+            msg += "Surname is empty!\n";
+        if(email.length <= 0)
+            msg += "Email is empty!\n";
+        if(username.length <= 0)
+            msg += "Username is empty!\n";
+        if(password.length <= 0)
+            msg += "Password is empty!\n";
+        if(isNaN(Date.parse(birthDate)))
+            msg += "Date is wrong!\n";
+
+        setErrorMsg(msg);
+
+        // reset error message after 5 seconds
+        setTimeout(() => setErrorMsg(""), 5000);
+    }
+
     return (
         <div className="access" id="login">
-            <div className="title">Log in</div>
-            <div className="login">
-                <label>Username:</label>
-                <input type="text"/>
-                <label>Password:</label>
-                <input type="password"/>
-                <button>Log in</button>
+            <div className="box">
+                <div className="title">Log in</div>
+                <div className="login">
+                    <label>Username:</label>
+                    <input type="text"/>
+                    <label>Password:</label>
+                    <input type="password"/>
+                    <button>Log in</button>
+                </div>
             </div>
-            <div className="or">
-                <hr/> OR <hr/>
+            <div className="box">
+                <div className="or">
+                    <hr/> OR <hr/>
+                </div>
             </div>
-            <div className="title">Sign up</div>
-            <div className="signup">
-                <label>Name:</label>
-                <input type="text" onChange={(event) => {setName(event.target.value)}}/>
-                <label>Surname:</label>
-                <input type="text" onChange={(event) => {setSurname(event.target.value)}}/>
-                <label>Email:</label>
-                <input type="email" onChange={(event) => {setEmail(event.target.value)}}/>
-                <label>Birth date:</label>
-                <input type="date" onChange={(event) => {setBirthDate(event.target.value)}}/>
-                <label>Username:</label>
-                <input type="text" onChange={(event) => {setUsername(event.target.value)}}/>
-                <label>Password:</label>
-                <input type="password" onChange={(event) => {setPassword(sha512(event.target.value))}}/>
-                <button onClick={signUp}>Sign up</button>
+            <div className="box">
+                <div className="title">Sign up</div>
+                <div className="signup">
+                    <label>Name:</label>
+                    <input type="text" onChange={(event) => {setName(event.target.value)}}/>
+                    <label>Surname:</label>
+                    <input type="text" onChange={(event) => {setSurname(event.target.value)}}/>
+                    <label>Email:</label>
+                    <input type="email" onChange={(event) => {setEmail(event.target.value)}}/>
+                    <label>Birth date:</label>
+                    <input type="date" onChange={(event) => {setBirthDate(event.target.value)}}/>
+                    <label>Username:</label>
+                    <input type="text" onChange={(event) => {setUsername(event.target.value)}}/>
+                    <label>Password:</label>
+                    <input type="password" onChange={(event) => {setPassword(sha512(event.target.value))}}/>
+                    <button onClick={signUp}>Sign up</button>
+                </div>
             </div>
+
+            {/* Used to show error message */}
+            <Snackbar open={errorMsg.length > 0} autoHideDuration={0} anchorOrigin={{vertical: 'bottom', horizontal:'center'}}>
+                <Alert severity="error" sx={{ width: '100%' }}>
+                    {errorMsg}
+                </Alert>
+            </Snackbar>
+
+            {/* Used to show success message */}
+            <Snackbar open={successMsg.length > 0} autoHideDuration={0} anchorOrigin={{vertical: 'bottom', horizontal:'center'}}>
+                <Alert severity="success" sx={{ width: '100%' }}>
+                    {successMsg}
+                </Alert>
+            </Snackbar>
         </div>
         );
 }
