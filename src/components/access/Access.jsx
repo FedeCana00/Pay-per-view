@@ -1,6 +1,7 @@
 import "./access.scss"
 import { useState } from "react";
 import axios from "axios";
+import { sha512 } from "js-sha512";
 
 export default function Access() {
     const [name, setName] = useState("");
@@ -11,6 +12,7 @@ export default function Access() {
     const [password, setPassword] = useState("");
 
     const signUp = () => {
+        console.log(password)
         axios.post("http://localhost:3001/createPerson", {
             name: name,
             surname: surname,
@@ -25,7 +27,7 @@ export default function Access() {
 
     // remove "-" and convert to integer
     function convertDateIntoInt(date){
-        return parseInt(date.replace("-", ""));
+        return parseInt(date.replaceAll("-", ""));
     }
 
     return (
@@ -54,7 +56,7 @@ export default function Access() {
                 <label>Username:</label>
                 <input type="text" onChange={(event) => {setUsername(event.target.value)}}/>
                 <label>Password:</label>
-                <input type="password" onChange={(event) => {setPassword(event.target.value)}}/>
+                <input type="password" onChange={(event) => {setPassword(sha512(event.target.value))}}/>
                 <button onClick={signUp}>Sign up</button>
             </div>
         </div>
