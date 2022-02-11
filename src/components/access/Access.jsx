@@ -6,11 +6,15 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 export default function Access() {
+    // log in useState
+    const [lEmail, setLEmail] = useState("");
+    const [lPassword, setLPassword] = useState("");
+
+    // sign up useState
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
     const [birthDate, setBirthDate] = useState("");
-    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     // used to show error message
@@ -18,9 +22,34 @@ export default function Access() {
     // used to show success message
     const [successMsg, setSuccessMsg] = useState("");
 
+    const login = () => {
+        // get request
+        axios.get("http://localhost:3001/login", {
+            params: {
+                email: lEmail,
+                password: lPassword
+            }
+        }).then((response) => {
+            console.log(response.data.length);
+            if(response.data.length > 0){
+                setSuccessMsg("Logged in successfully!");
+
+                // reset success message after 5 seconds
+                setTimeout(() => setSuccessMsg(""), 5000);
+
+                saveEmailInSessionStorage();
+            } else {
+                setErrorMsg("Incorrect credentials entered!");
+
+                // reset error message after 5 seconds
+                setTimeout(() => setErrorMsg(""), 5000);
+            }
+        });
+    };
+
     const signUp = () => {
         // check if fields are filled right
-        if(checkFields())
+        if(!checkFields())
             return;
 
         // post request
@@ -29,13 +58,12 @@ export default function Access() {
             surname: surname,
             email: email,
             birthDate: convertDateIntoInt(birthDate),
-            username: username,
             password: password
         }).then(() => {
             console.log("Sign up successfully!");
         });
 
-        successMsg("Registration was successful!");
+        setSuccessMsg("Registration was successful!");
 
         // reset success message after 5 seconds
         setTimeout(() => setSuccessMsg(""), 5000);
@@ -57,8 +85,19 @@ export default function Access() {
             msg += "Surname is empty!\n";
         if(email.length <= 0)
             msg += "Email is empty!\n";
-        if(username.length <= 0)
-            msg += "Username is empty!\n";
+        else{ // TODO: wait the response before show message
+            // get request
+            axios.get("http://localhost:3001/isUsernameInUse", {
+                params: {
+                    email: email
+                }
+            }).then((response) => {
+                if(response.data !== undefined){
+                    msg += "Email already in use!\n";
+                }
+            });
+        }
+
         if(password.length <= 0)
             msg += "Password is empty!\n";
         if(isNaN(Date.parse(birthDate)))
@@ -68,6 +107,13 @@ export default function Access() {
 
         // reset error message after 5 seconds
         setTimeout(() => setErrorMsg(""), 5000);
+
+        return msg.length == 0;
+    }
+
+    // save email of user connected
+    function saveEmailInSessionStorage(){
+        window.sessionStorage.setItem('email', lEmail);
     }
 
     return (
@@ -75,11 +121,11 @@ export default function Access() {
             <div className="box">
                 <div className="title">Log in</div>
                 <div className="login">
-                    <label>Username:</label>
-                    <input type="text"/>
+                    <label>Email:</label>
+                    <input type="text" onChange={(event) => {setLEmail(event.target.value)}}/>
                     <label>Password:</label>
-                    <input type="password"/>
-                    <button>Log in</button>
+                    <input type="password" onChange={(event) => {setLPassword(sha512(event.target.value))}}/>
+                    <button onClick={login}>Log in</button>
                 </div>
             </div>
             <div className="box">
@@ -98,8 +144,6 @@ export default function Access() {
                     <input type="email" onChange={(event) => {setEmail(event.target.value)}}/>
                     <label>Birth date:</label>
                     <input type="date" onChange={(event) => {setBirthDate(event.target.value)}}/>
-                    <label>Username:</label>
-                    <input type="text" onChange={(event) => {setUsername(event.target.value)}}/>
                     <label>Password:</label>
                     <input type="password" onChange={(event) => {setPassword(sha512(event.target.value))}}/>
                     <button onClick={signUp}>Sign up</button>

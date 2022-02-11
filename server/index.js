@@ -7,30 +7,19 @@ const cors = require('cors')
 app.use(cors());
 app.use(express.json());
 
-/* const db = mysql.createConnection({
+// database configuration
+const config = {
   user: "fdsa959shf",
   host: "212.237.39.62",
   port: 3306,
   password: "jzr_uer6KJZ@hmh5jye",
   database: "tg57srdjbq",
-});
-
-db.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ', err);
-    return;
-  }
-}); */
+}
 
 // insert into persona
 app.post("/createPerson", (req, res) => {
-  const db = mysql.createConnection({
-    user: "fdsa959shf",
-    host: "212.237.39.62",
-    port: 3306,
-    password: "jzr_uer6KJZ@hmh5jye",
-    database: "tg57srdjbq",
-  });
+  const db = mysql.createConnection(config);
+
   const name = req.body.name;
   const surname = req.body.surname;
   const email = req.body.email;
@@ -46,6 +35,43 @@ app.post("/createPerson", (req, res) => {
         res.send("Person inserted into DB!");
       }
     });
+
+    // close connection
+    db.end();
+});
+
+// get if the username is in use
+app.get("/isUsernameInUse", (req, res) => {
+  const db = mysql.createConnection(config);
+
+    db.query("SELECT * FROM persona WHERE email = ?", [req.query.email],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
+});
+
+// login user
+app.get("/login", (req, res) => {
+  const db = mysql.createConnection(config);
+    
+    db.query("SELECT * FROM persona WHERE email = ? AND password = ?", [req.query.email, req.query.password],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
 });
 
 app.listen(PORT, () => {

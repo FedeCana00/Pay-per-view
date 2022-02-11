@@ -9,7 +9,7 @@ export default function Navbar() {
                     <a href="" className="logo">
                         Pay per view
                     </a>
-                    <img src="" alt="" />
+                    <img src="assets/icon.png" alt="icon" />
                 </div>
                 <div className="center">
                     <div className="text">
@@ -24,7 +24,7 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="right">
-
+                    {window.sessionStorage.getItem('email')}
                 </div>
             </div>
 
