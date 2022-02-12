@@ -104,4 +104,43 @@
         }
     }
   }
+
+  .generes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    display: none;
+
+    &:active{
+      display: flex;
+    }
+
+    .genere{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background-color: $backgroundColor;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px;
+      box-shadow: 5px 5px 5px grey;
+
+      img{
+        height: 32px;
+        width: 32px;
+        margin: 5px;
+      }
+
+      .name{
+        font-size: medium;
+        font-weight: bold;
+        color: black;
+        margin: 5px;
+      }
+    }
+
+  }
 }
