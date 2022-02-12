@@ -1,0 +1,23 @@
+
+
+.disconnected{
+    margin: 10px;
+
+    button{
+        background-color:dodgerblue;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: medium;
+        border-radius: 12px;
+        box-shadow: 5px 5px 5px grey;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

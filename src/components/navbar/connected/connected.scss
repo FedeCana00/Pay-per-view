@@ -1,0 +1,21 @@
+
+
+.connected{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 10px;
+
+    img{
+        width: 32px;
+        height: 32px;
+        margin: 10px;
+    }
+
+    .user{
+        font-weight: bold;
+        color: black;
+        margin: 10px;
+    }
+}

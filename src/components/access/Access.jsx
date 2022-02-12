@@ -4,8 +4,11 @@ import axios from "axios";
 import { sha512 } from "js-sha512";
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import { useNavigate } from 'react-router-dom';
 
 export default function Access() {
+    // used to change programmatically page
+    const navigate = useNavigate();
     // log in useState
     const [lEmail, setLEmail] = useState("");
     const [lPassword, setLPassword] = useState("");
@@ -114,6 +117,12 @@ export default function Access() {
     // save email of user connected
     function saveEmailInSessionStorage(){
         window.sessionStorage.setItem('email', lEmail);
+
+        // go to home page
+        navigate('/');
+        // refresh page in order reload navabar component 
+        // else not change element on the right
+        window.location.reload();
     }
 
     return (
