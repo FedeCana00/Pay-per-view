@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element={<Navbar />}>
             <Route index element={<Home />}/>
             <Route path="/access" element={<Access />}/>
-            <Route path="/film/:id" components={Film}/>
+            <Route path="/film/:id" element={<Film />}/>
           </Route>
       </Routes>
     </BrowserRouter>

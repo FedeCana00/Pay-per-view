@@ -1,34 +1,76 @@
-
+@import "../../global.scss";
 
 .film{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 80%;
 
     .top{
+        display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
 
         .left{
-            width: 50%;
+            flex: 0.5;
             display: flex;
+            align-items: flex-end;
+            justify-content: right;
+            margin: 20px;
 
             img{
-                width: 100%;
+                width: 200px;
+                box-shadow: 5px 5px 5px grey;
             }
         }
 
         .right{
-            width: 50%;
-            display: flex;
+            flex: 0.5;
+            position: relative;
             flex-direction: column;
             justify-content: left;
             color: black;
+            margin: 20px;
 
             .title{
                 font-size: xx-large;
+                font-weight: 600;
+            }
+
+            .genere{
+                font-size: small;
+                font-weight: bold;
+                color: $red;
+            }
+
+            .data{
+                font-size: small;
+            }
+
+            .plot{
+                font-size: small;
+            }
+        }
+
+        button{
+            width: 200px;
+            background-color: $red;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: medium;
+            font-weight: bold;
+            border-radius: 12px;
+            box-shadow: 5px 5px 5px grey;
+            cursor: pointer;
+            margin: 20px;
+    
+            &:hover {
+                opacity: 0.8;
             }
         }
 

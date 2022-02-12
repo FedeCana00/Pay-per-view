@@ -1,35 +1,46 @@
 import "./film.scss"
-import { useState, useEffect, Component } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 
-export default class Film extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {film: null};
-        console.log(props.match);
-        /*
+export default function Film(){
+    const [film, setFilm] = useState({});
+    // used to get the id passed from the url
+    const { id } = useParams()
+
+    // execute only one time
+    useEffect(() => {
+        
         axios.get("http://localhost:3001/film", {
             params: {
-                id: props.match.params.id
+                id: id
             }
         }).then((response) => {
-            console.log(response);
-            this.state.film = response;
-        });*/
-      }
+            if(response.data === null)
+                console.log("Error! Film not found!");
+            else
+                setFilm(response.data[0]);
+        });
+    }, []);
 
-    render() {
-        return (
-            <div className="film">
-                <div className="top">
-                    <div className="left">
-                        <img src={this.film.img} alt="" />
+    return (
+        <div className="film">
+            <div className="top">
+                <div className="left">
+                    <img src={film.locandina} alt="" />
+                </div>
+                <div className="right">
+                    <div className="title">{film.nome}</div>
+                    <div className="data">{film.datauscita} {film.durata} minutes</div>
+                    <div className="genere">{film.genere}</div>
+                    <br/><br/>
+                    <div className="plot">
+                        <b>Plot:</b> {film.trama}
                     </div>
-                    <div className="right">
-                        <div className="title">{this.film.name}</div>
-                    </div>
+                    <br /><br/>
+                    <button>Buy in 4k {film.prezzo} €</button>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
