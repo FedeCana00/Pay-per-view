@@ -1,4 +1,5 @@
 import "./home.scss"
+import { Link } from "react-router-dom";
 
 export default function Home() {
 
@@ -55,14 +56,16 @@ export default function Home() {
             </div>
             <div className="container">
                 {films.map((d) => (
-                    <div className="card">
-                        <img src="assets/film.jpg" />
-                        <div className="info">
-                            <div className="name">{d.name}</div>
-                            <div className="genere">{d.genere}</div>
-                            <div className="price">{d.price} €</div>
+                    <Link to={"/film/" + d.id}>
+                        <div className="card">
+                            <img src="assets/film.jpg" />
+                            <div className="info">
+                                <div className="name">{d.name}</div>
+                                <div className="genere">{d.genere}</div>
+                                <div className="price">{d.price} €</div>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

@@ -74,6 +74,23 @@ app.get("/login", (req, res) => {
     db.end();
 });
 
+// get film from id
+app.get("/film", (req, res) => {
+  const db = mysql.createConnection(config);
+    
+    db.query("SELECT * FROM film WHERE id = ?", [req.query.id],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
