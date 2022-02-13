@@ -38,7 +38,7 @@ export default function Navbar() {
                     {window.sessionStorage.getItem('email') === null ? <Disconnected /> : <Connected />}
                 </div>
             </div>
-            <div className={showGeneres ? "generes active" : "generes"}>
+            <div className={`generes ${showGeneres ? "active" : ""}`}>
                 {generes.map((d) => (
                     <div className="genere">
                         <img src={d.img} />
