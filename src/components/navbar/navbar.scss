@@ -107,7 +107,7 @@
     }
   }
 
-  .generes{
+  .box{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -141,6 +141,24 @@
       padding: 10px;
       margin: 10px;
       box-shadow: 5px 5px 5px grey;
+    }
+
+    input{
+      border: none;
+      height: auto;
+      width: 40%;
+      font-size: medium;
+      padding: 5px;
+      border-radius: 12px;
+      margin: 10px;
+      box-shadow: 5px 5px 5px grey;
+    }
+
+    img{
+      width: 32px;
+      height: 32px;
+      margin: 10px;
+      cursor: pointer;
     }
 
   }
