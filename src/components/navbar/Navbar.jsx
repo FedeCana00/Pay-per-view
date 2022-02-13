@@ -8,11 +8,6 @@ import { useState } from "react";
 export default function Navbar() {
     const [showGeneres, setShowGeneres] = useState(false);
 
-    const showHide = () => {
-        console.log(showGeneres);
-        setShowGeneres(!showGeneres);
-    }
-
     return (
         <div className="navbar">
             <div className="wrapper">
@@ -28,7 +23,7 @@ export default function Navbar() {
                             <li>
                                 <Link to="/">Home</Link>
                             </li>
-                            <li onClick={showHide}>
+                            <li onClick={() => setShowGeneres(!showGeneres)}>
                                 <a>Generes</a>
                             </li>
                         </ul>
@@ -40,12 +35,9 @@ export default function Navbar() {
             </div>
             <div className={`generes ${showGeneres ? "active" : ""}`}>
                 {generes.map((d) => (
-                    <div className="genere">
-                        <img src={d.img} />
-                        <div className="info">
-                            {d.name}
-                        </div>
-                    </div>
+                    <Link to={"/films/" + d.name}>
+                        {d.name}
+                    </Link>
                 ))}
             </div>
 

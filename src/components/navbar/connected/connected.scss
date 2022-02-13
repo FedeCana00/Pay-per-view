@@ -1,4 +1,4 @@
-
+@import "../../../global.scss";
 
 .connected{
     display: flex;
@@ -17,5 +17,24 @@
         font-weight: bold;
         color: black;
         margin: 10px;
+    }
+
+    button{
+        background-color: $red;
+        border: none;
+        color: white;
+        padding: 10px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: small;
+        border-radius: 12px;
+        box-shadow: 5px 5px 5px grey;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 }

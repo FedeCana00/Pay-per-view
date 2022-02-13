@@ -3,17 +3,26 @@
 export const generes = [
     {
         id: 0,
-        name: "Horror",
-        img: "assets/user.png"
+        name: "Animation",
     },
     {
         id: 1,
-        name: "Horror",
-        img: "assets/user.png"
+        name: "Action",
     },
     {
         id: 2,
+        name: "Comedies",
+    },
+    {
+        id: 3,
+        name: "Dramatic",
+    },
+    {
+        id: 4,
+        name: "Family",
+    },
+    {
+        id: 5,
         name: "Horror",
-        img: "assets/user.png"
     },
 ];

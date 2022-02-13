@@ -27,7 +27,7 @@ export default function Film(){
         <div className="film">
             <div className="top">
                 <div className="left">
-                    <img src={film.locandina} alt="" />
+                    <img src={film.locandina} alt=""/>
                 </div>
                 <div className="right">
                     <div className="title">{film.nome}</div>

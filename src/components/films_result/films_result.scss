@@ -1,6 +1,6 @@
 @import "../../global.scss";
 
-.home{
+.films_result{
     background-color: $backgroundColor;
     display: flex;
     flex-direction: column;
@@ -18,25 +18,6 @@
         .title-name{
             font-size: xx-large;
             color: black;
-        }
-
-        button{
-            background-color: $red;
-            border: none;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            font-size: small;
-            border-radius: 12px;
-            box-shadow: 5px 5px 5px grey;
-            cursor: pointer;
-
-            &:hover {
-                opacity: 0.8;
-            }
         }
     }
 
@@ -87,6 +68,10 @@
                     font-size: medium;
                     font-weight: bold;
                     color: inherit;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    max-width: 150px;
                 }
 
                 .genere{
