@@ -1,5 +1,4 @@
 
-
 export const generes = [
     {
         id: 0,
