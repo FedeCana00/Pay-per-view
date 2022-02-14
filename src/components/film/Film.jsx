@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 
 export default function Film(){
-    const [film, setFilm] = useState({});
+    const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
 
@@ -18,8 +18,23 @@ export default function Film(){
         }).then((response) => {
             if(response.data === null)
                 console.log("Error! Film not found!");
-            else
-                setFilm(response.data[0]);
+            else{
+                if(response.length > 0)
+                    setFilm(response.data[0]);
+                else
+                    // film not exists
+                    setFilm({
+                        id: -1,
+                        nome: "",
+                        datauscita: "",
+                        locandina: "https://cdn-icons.flaticon.com/png/512/4020/premium/4020972.png?token=exp=1644857222~hmac=392f864b47c7fd14ed305050d6624259",
+                        durata: 0,
+                        genere: "",
+                        trama: "",
+                        prezzo: 0
+                
+                    });
+            }
         });
     }, []);
 

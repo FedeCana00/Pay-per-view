@@ -13,7 +13,7 @@ export default function Films_Result() {
     const { param } = useParams();
     const { t } = useParams();
 
-    // execute only one time
+    // execute each time that param change
     useEffect(() => {
         
         switch(t){
@@ -24,7 +24,7 @@ export default function Films_Result() {
                 searchByName();
                 break;
         }
-    }, []);
+    }, [param]);
 
     // search films by genere
     function searchByGenere(){
