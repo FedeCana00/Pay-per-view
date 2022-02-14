@@ -25,3 +25,12 @@ export const generes = [
         name: "Horror",
     },
 ];
+
+export const specialsGenere = [
+    {
+        name: "New releases"
+    },
+    {
+        name: "Best sellers"
+    },
+];

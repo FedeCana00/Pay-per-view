@@ -1,73 +1,18 @@
 import "./home.scss"
-import { Link } from "react-router-dom";
+import { generes, specialsGenere } from "../navbar/genere";
+import Films_bar from "../films_bar/Films_bar";
 
 export default function Home() {
 
-    const films = [
-        {
-            id: 1,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-        {
-            id: 2,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-        {
-            id: 3,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-        {
-            id: 4,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-        {
-            id: 5,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-        {
-            id: 6,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-        {
-            id: 7,
-            name: "film1",
-            genere: "horror",
-            price: 12.20
-        },
-    ];
-
     return (
         <div className="home" id="home">
-            <div className="title-container">
-                <div className="title-name">Best seller</div>
-                <button id="show more">Show more</button>
-            </div>
-            <div className="container">
-                {films.map((d) => (
-                    <Link to={"/film/" + d.id}>
-                        <div className="card">
-                            <img src="assets/film.jpg" />
-                            <div className="info">
-                                <div className="name">{d.name}</div>
-                                <div className="genere">{d.genere}</div>
-                                <div className="price">{d.price} €</div>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
+            <Films_bar show={specialsGenere[0].name}/>
+            <Films_bar show={generes[0].name}/>
+            <Films_bar show={generes[1].name}/>
+            <Films_bar show={generes[2].name}/>
+            <Films_bar show={generes[3].name}/>
+            <Films_bar show={generes[4].name}/>
+            <Films_bar show={generes[5].name}/>
         </div>
         );
 }

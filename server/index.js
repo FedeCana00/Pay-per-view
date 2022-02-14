@@ -125,6 +125,23 @@ app.get("/films/searchName", (req, res) => {
     db.end();
 });
 
+// get new releases films
+app.get("/films/newReleases", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  db.query("SELECT * FROM film order by datauscita desc",
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
+  db.end();
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
