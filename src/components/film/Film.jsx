@@ -19,7 +19,7 @@ export default function Film(){
             if(response.data === null)
                 console.log("Error! Film not found!");
             else{
-                if(response.length > 0)
+                if(response.data.length > 0)
                     setFilm(response.data[0]);
                 else
                     // film not exists
