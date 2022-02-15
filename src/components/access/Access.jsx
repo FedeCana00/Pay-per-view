@@ -127,7 +127,7 @@ export default function Access() {
 
     return (
         <div className="access" id="login">
-            <div className="box">
+            <div className="form">
                 <div className="title">Log in</div>
                 <div className="login">
                     <label>Email:</label>
@@ -137,12 +137,12 @@ export default function Access() {
                     <button onClick={login}>Log in</button>
                 </div>
             </div>
-            <div className="box">
+            <div className="form">
                 <div className="or">
                     <hr/> OR <hr/>
                 </div>
             </div>
-            <div className="box">
+            <div className="form">
                 <div className="title">Sign up</div>
                 <div className="signup">
                     <label>Name:</label>
