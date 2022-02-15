@@ -1,4 +1,5 @@
 const express = require("express");
+var Sequelize= require('sequelize')
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mysql = require('mysql')
@@ -73,6 +74,23 @@ app.get("/login", (req, res) => {
     // close connection
     db.end();
 });
+
+app.get("/userinfo", (req, res) => {
+  const db = mysql.createConnection(config);
+    
+    db.query("SELECT * FROM persona WHERE email = ? AND password = ?", [req.query.email, req.query.password],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
+});
+
 
 // get film from id
 app.get("/film", (req, res) => {

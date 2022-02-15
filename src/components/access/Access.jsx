@@ -41,6 +41,12 @@ export default function Access() {
                 setTimeout(() => setSuccessMsg(""), 5000);
 
                 saveEmailInSessionStorage();
+                savePasswordInSessionStorage()
+                 // go to home page
+                navigate('/');
+                // refresh page in order reload navabar component 
+                // else not change element on the right
+                window.location.reload();
             } else {
                 setErrorMsg("Incorrect credentials entered!");
 
@@ -116,13 +122,11 @@ export default function Access() {
 
     // save email of user connected
     function saveEmailInSessionStorage(){
-        window.sessionStorage.setItem('email', lEmail);
+        window.sessionStorage.setItem('email', lEmail);      
+    }
 
-        // go to home page
-        navigate('/');
-        // refresh page in order reload navabar component 
-        // else not change element on the right
-        window.location.reload();
+    function savePasswordInSessionStorage(){
+        window.sessionStorage.setItem('password', lPassword);
     }
 
     return (
@@ -131,7 +135,7 @@ export default function Access() {
                 <div className="title">Log in</div>
                 <div className="login">
                     <label>Email:</label>
-                    <input type="text" onChange={(event) => {setLEmail(event.target.value)}}/>
+                    <input type="email" onChange={(event) => {setLEmail(event.target.value)}}/>
                     <label>Password:</label>
                     <input type="password" onChange={(event) => {setLPassword(sha512(event.target.value))}}/>
                     <button onClick={login}>Log in</button>

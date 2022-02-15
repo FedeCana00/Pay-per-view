@@ -1,5 +1,6 @@
 import "./connected.scss"
 import { useNavigate } from 'react-router-dom';
+import { Link} from "react-router-dom";
 
 export default function Connected() {
     // used to change programmatically page
@@ -20,9 +21,14 @@ export default function Connected() {
         <div className="connected">
             <img src="assets/user.png" alt="user" />
             <div className="user">
-                {window.sessionStorage.getItem('email')}
+                <Link to="/personal">
+                    <button>
+                    {window.sessionStorage.getItem('email')}
+                    </button>
+                </Link>
+                
             </div>
-            <button onClick={logout}>Logout</button>
+            <button className="logout" onClick={logout}>Logout</button>
         </div>
     );
 }
