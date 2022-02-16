@@ -58,6 +58,7 @@ app.get("/isUsernameInUse", (req, res) => {
 });
 
 // login user
+//TODO è il caso di mantenere un get per un login?
 app.get("/login", (req, res) => {
   const db = mysql.createConnection(config);
     
@@ -129,7 +130,7 @@ app.get("/films/genere", (req, res) => {
 app.get("/films/searchName", (req, res) => {
     const db = mysql.createConnection(config);
 
-    db.query("SELECT * FROM film WHERE nome LIKE '" + req.query.name + "%'",
+    db.query("SELECT * FROM film WHERE nome LIKE '?%' ",req.query.name,
     (err, result) => {
       if(err){
         console.log(err);
@@ -158,6 +159,44 @@ app.get("/films/newReleases", (req, res) => {
   // close connection
   db.end();
 });
+
+app.post('/payment',(req,res)=>{
+  const db = mysql.createConnection(config);
+  const idFilm= req.query.idFilm;
+  const email= req.query.email;
+  const password= req.query.password;
+  const prezzo=""
+  const idUser=""
+  db.query("SELECT id FROM persona WHERE email = ? AND password =?", [email,password],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        idUser= result;
+      }
+    });
+  db.query("SELECT prezzo FROM film WHERE id = ?", [idFilm],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        prezzo= result;
+      }
+    });
+  
+  db.query("INSERT INTO acquisto (idFilm,idUser,prezzo) VALUES (?,?,?)", [idFilm,idUser,prezzo],
+  (err, result)=>{
+    if(err){
+      console.log(err);
+    } else {
+      res.status(201);
+      res.send("Transaction inserted into DB!");
+    }
+  })
+})
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

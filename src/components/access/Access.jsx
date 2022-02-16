@@ -25,6 +25,7 @@ export default function Access() {
     // used to show success message
     const [successMsg, setSuccessMsg] = useState("");
 
+    //handling error of buying without user signed in
     useEffect(()=>{
         console.log(window.sessionStorage.getItem('Error'))
         if(window.sessionStorage.getItem('Error')!=null){
@@ -50,6 +51,7 @@ export default function Access() {
                 // reset success message after 5 seconds
                 setTimeout(() => setSuccessMsg(""), 5000);
 
+                //TODO io creerei una classe con tutti i dati tranne la password (o con?), più la lista dei film
                 saveEmailInSessionStorage();
                 savePasswordInSessionStorage()
                  // go to home page
