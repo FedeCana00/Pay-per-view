@@ -34,7 +34,8 @@ export default function Access() {
             setTimeout(() => setErrorMsg(""), 5000);
         }
         },[]);
-    const login = () => {
+    const login = (e) => {
+        e.preventDefault()
         // get request
         axios.get("http://localhost:3001/login", {
             params: {
@@ -73,7 +74,8 @@ export default function Access() {
         });
     };
 
-    const signUp = () => {
+    const signUp = (e) => {
+        e.preventDefault()
         // check if fields are filled right
         if(!checkFields())
             return;
@@ -150,13 +152,13 @@ export default function Access() {
         <div className="access" id="login">
             <div className="form">
                 <div className="title">Log in</div>
-                <div className="login">
+                <form className="login" onSubmit={login}>
                     <label>Email:</label>
                     <input type="email" onChange={(event) => {setLEmail(event.target.value)}}/>
                     <label>Password:</label>
                     <input type="password" onChange={(event) => {setLPassword(sha512(event.target.value))}}/>
-                    <button onClick={login}>Log in</button>
-                </div>
+                    <button type='submit'>Log in</button>
+                </form>
             </div>
             <div className="form">
                 <div className="or">
@@ -165,7 +167,7 @@ export default function Access() {
             </div>
             <div className="form">
                 <div className="title">Sign up</div>
-                <div className="signup">
+                <form className="signup" onSubmit={signUp}>
                     <label>Name:</label>
                     <input type="text" onChange={(event) => {setName(event.target.value)}}/>
                     <label>Surname:</label>
@@ -176,8 +178,8 @@ export default function Access() {
                     <input type="date" onChange={(event) => {setBirthDate(event.target.value)}}/>
                     <label>Password:</label>
                     <input type="password" onChange={(event) => {setPassword(sha512(event.target.value))}}/>
-                    <button onClick={signUp}>Sign up</button>
-                </div>
+                    <button type='submit'>Sign up</button>
+                </form>
             </div>
 
             {/* Used to show error message */}

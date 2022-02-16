@@ -1,8 +1,15 @@
 import React from 'react'
+import './payment.scss'
 
 const Payment = () => {
   return (
-    <div>Payment</div>
+    <div className='payment'>
+      <div className='form'>
+      <div className="title">Log in</div>
+      <div className='signup'>Pagamento</div>
+        
+      </div>
+    </div>
   )
 }
 
