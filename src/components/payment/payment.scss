@@ -1,0 +1,84 @@
+@import "../../global.scss";
+
+.access{
+    background-color: $backgroundColor;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+
+    .form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .title{
+        font-size: xx-large;
+        color: black;
+        font-weight: bold;
+        margin: 20px;
+    }
+
+    label{
+        font-size: large;
+        color: black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    input{
+        border: none;
+        height: auto;
+        width: 220px;
+        font-size: medium;
+        padding: 5px;
+        border-radius: 12px;
+        
+        box-shadow: 5px 5px 5px grey;
+    }
+
+    button{
+        width: 220px;
+        padding: 5px;
+        font-size: medium;
+        font-weight: bold;
+        border-radius: 12px;
+        color: white;
+        border: none;
+        margin: 10px;
+        box-shadow: 5px 5px 5px grey;
+        transition: all 1s;
+    }
+
+    .creditcard{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        button{
+            background-color:dodgerblue;
+
+            &:active{
+                background-color: goldenrod;
+            }
+        }
+    }
+
+    .or{
+        margin: 20px;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+        flex-direction: column;
+        color:grey;
+
+        hr{
+            height: 100px;
+            background-color: grey;
+            margin: 10px;
+        }
+    }
+}

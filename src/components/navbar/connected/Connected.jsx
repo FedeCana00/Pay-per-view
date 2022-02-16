@@ -19,7 +19,7 @@ export default function Connected() {
 
     return (
         <div className="connected">
-            <img src="assets/user.png" alt="user" />
+            <img src="/assets/user.png" alt="user" />
             <div className="user">
                 <Link to="/personal">
                     <button>

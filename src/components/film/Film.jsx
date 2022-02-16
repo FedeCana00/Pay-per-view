@@ -2,15 +2,18 @@ import "./film.scss"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Film(){
+    const navigate= useNavigate()
     const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
 
     // execute only one time
     useEffect(() => {
-        
+        window.sessionStorage.removeItem('linkto');
         axios.get("http://localhost:3001/film", {
             params: {
                 id: id
@@ -37,7 +40,25 @@ export default function Film(){
             }
         });
     }, []);
-
+    const setSessionstorage=()=>{
+        window.sessionStorage.setItem('linkto',id);
+    }
+    const checkLogin= ()=>{
+        if(window.sessionStorage.getItem('email') === null && window.sessionStorage.getItem('password') === null){
+            window.sessionStorage.setItem('Error','Please, sign in before buying');
+            return<Link to="/access">
+                <button onClick={()=>setSessionstorage()}>Buy in 4k {film.prezzo} €</button>
+                </Link>
+            
+        }
+        else{
+            
+            return<Link to="/payment">
+                <button onClick={()=>setSessionstorage()}>Buy in 4k {film.prezzo} €</button>
+                </Link>
+        }
+    }
+ 
     return (
         <div className="film">
             <div className="top">
@@ -53,7 +74,8 @@ export default function Film(){
                         <b>Plot:</b> {film.trama}
                     </div>
                     <br /><br/>
-                    <button>Buy in 4k {film.prezzo} €</button>
+                    {checkLogin()}
+                    
                 </div>
             </div>
         </div>

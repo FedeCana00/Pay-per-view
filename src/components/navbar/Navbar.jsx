@@ -46,7 +46,7 @@ export default function Navbar() {
                     <a href="" className="logo">
                         Pay per view
                     </a>
-                    <img src="assets/icon.png" alt="icon" />
+                    <img src="/assets/icon.png" alt="icon" />
                 </div>
                 <div className="center">
                     <div className="text">
@@ -82,8 +82,8 @@ export default function Navbar() {
                 <input type="text" placeholder="Insert here the film name..." 
                     onChange={(event) => {textChanged(event.target.value)}}
                     value={textSearch}/>
-                <img src="assets/search.png" alt="search" />
-                <img src="assets/close.png" alt="clear" onClick={() => {textChanged("")}}/>
+                <img src="/assets/search.png" alt="search" />
+                <img src="/assets/close.png" alt="clear" onClick={() => {textChanged("")}}/>
             </div>
 
             <Outlet />

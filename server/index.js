@@ -1,5 +1,4 @@
 const express = require("express");
-var Sequelize= require('sequelize')
 const PORT = process.env.PORT || 3001;
 const app = express();
 const mysql = require('mysql')

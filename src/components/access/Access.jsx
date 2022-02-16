@@ -1,5 +1,5 @@
 import "./access.scss"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { sha512 } from "js-sha512";
 import Alert from '@mui/material/Alert';
@@ -25,6 +25,15 @@ export default function Access() {
     // used to show success message
     const [successMsg, setSuccessMsg] = useState("");
 
+    useEffect(()=>{
+        console.log(window.sessionStorage.getItem('Error'))
+        if(window.sessionStorage.getItem('Error')!=null){
+            setErrorMsg(window.sessionStorage.getItem('Error'));
+            window.sessionStorage.removeItem('Error')
+            // reset error message after 5 seconds
+            setTimeout(() => setErrorMsg(""), 5000);
+        }
+        },[]);
     const login = () => {
         // get request
         axios.get("http://localhost:3001/login", {
@@ -43,7 +52,15 @@ export default function Access() {
                 saveEmailInSessionStorage();
                 savePasswordInSessionStorage()
                  // go to home page
-                navigate('/');
+                 if(window.sessionStorage.getItem('linkto')){
+                    
+                    navigate('/film/'+window.sessionStorage.getItem('linkto'));
+                    window.sessionStorage.removeItem('linkto');
+                 }
+                 else{
+                    navigate('/');
+                 }
+                
                 // refresh page in order reload navabar component 
                 // else not change element on the right
                 window.location.reload();
