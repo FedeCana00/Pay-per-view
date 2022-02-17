@@ -53,16 +53,35 @@
         transition: all 1s;
     }
 
-    .creditcard{
+    .box_payment{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        margin: 10px;
 
-        button{
-            background-color:dodgerblue;
+        .creditcard{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
 
-            &:active{
-                background-color: goldenrod;
+            button{
+                background-color:dodgerblue;
+
+                &:active{
+                    background-color: goldenrod;
+                }
+            }
+        }
+
+        .img{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+
+            img{
+                width: 250px;
             }
         }
     }

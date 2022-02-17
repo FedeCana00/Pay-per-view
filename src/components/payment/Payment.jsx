@@ -99,33 +99,41 @@ const Payment = () => {
   return (
     <div className='payment'>
       <div className='form'>
-      <div className="title">Insert Credit Card info</div>
-      <form className='creditcard' onSubmit={submit}>
-        <label>Card Number</label>
-        <input type="text" pattern="[\d| ]{16,22}" placeholder="Card Number" onChange={(event) => {setCardnumber(event.target.value)}}/>
-        <label>Holder name:</label>
-        <input type="text" placeholder='Name' onChange={(event) => {setTitolare(event.target.value)}}/>
-        <label>CVC:</label>
-        <input type="text" pattern="\d{3,4}" placeholder='CVC' onChange={(event) => {setCvc(event.target.value)}}/>
-        
-        <label>Valid thru:</label>
-        <input type="month" onChange={(event) => {setDataScadenza(event.target.value)}}/>
-        <button type='submit'>Conferma</button>
-      </form>
-        
-      </div>
-      <Snackbar open={errorMsg.length > 0} autoHideDuration={0} anchorOrigin={{vertical: 'bottom', horizontal:'center'}}>
-                <Alert severity="error" sx={{ width: '100%' }}>
-                    {errorMsg}
-                </Alert>
-            </Snackbar>
+        <div className="title">Payment</div>
 
-            {/* Used to show success message */}
-            <Snackbar open={successMsg.length > 0} autoHideDuration={0} anchorOrigin={{vertical: 'bottom', horizontal:'center'}}>
-                <Alert severity="success" sx={{ width: '100%' }}>
-                    {successMsg}
-                </Alert>
-            </Snackbar>
+        <div className='box_payment'>
+          <div className='img'>
+            <img src='/assets/payment.png' alt='payment'/>
+          </div>
+
+          <form className='creditcard' onSubmit={submit}>
+            <label>Card Number</label>
+            <input type="text" pattern="[\d| ]{16,22}" placeholder="Card Number" onChange={(event) => {setCardnumber(event.target.value)}}/>
+            <label>Holder name:</label>
+            <input type="text" placeholder='Name' onChange={(event) => {setTitolare(event.target.value)}}/>
+            <label>CVC:</label>
+            <input type="text" pattern="\d{3,4}" placeholder='CVC' onChange={(event) => {setCvc(event.target.value)}}/>
+          
+            <label>Valid thru:</label>
+            <input type="month" onChange={(event) => {setDataScadenza(event.target.value)}}/>
+            <button type='submit'>Conferma</button>
+          </form>
+        </div>
+      </div>
+
+      <Snackbar open={errorMsg.length > 0} autoHideDuration={0} anchorOrigin={{vertical: 'bottom', horizontal:'center'}}>
+        <Alert severity="error" sx={{ width: '100%' }}>
+            {errorMsg}
+        </Alert>
+      </Snackbar>
+
+      {/* Used to show success message */}
+      <Snackbar open={successMsg.length > 0} autoHideDuration={0} anchorOrigin={{vertical: 'bottom', horizontal:'center'}}>
+          <Alert severity="success" sx={{ width: '100%' }}>
+              {successMsg}
+          </Alert>
+      </Snackbar>
+
     </div>
   )
 }
