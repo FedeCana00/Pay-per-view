@@ -26,7 +26,6 @@ export default function Connected() {
                     {window.sessionStorage.getItem('email')}
                     </button>
                 </Link>
-                
             </div>
             <button className="logout" onClick={logout}>Logout</button>
         </div>

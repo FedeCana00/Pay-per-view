@@ -23,6 +23,12 @@
       justify-content: center;
       flex-direction: row;
 
+      .admin{
+        writing-mode: vertical-rl;
+        color: darkgoldenrod;
+        font-weight: 900;
+      }
+
       img{
         width: 40px;
         margin-right: 40px;

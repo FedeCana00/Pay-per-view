@@ -17,6 +17,20 @@
         font-weight: bold;
         color: black;
         margin: 10px;
+
+        button{
+            box-shadow: none;
+            color: black;
+            font-weight: 600;
+            border-radius: 0px;
+            font-size: medium;
+            background-color: inherit;
+            transition: all 0.3s ease;
+
+            &:hover{
+                color: red;
+            }
+        }
     }
 
     button{

@@ -92,6 +92,10 @@ export default function Films_Result() {
         });
     }
 
+    function goToFilmPage(){
+        
+    }
+
     return (
         <div className="films_result" id="films_result">
             <div className="title-container">

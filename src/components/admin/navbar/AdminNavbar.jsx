@@ -1,4 +1,3 @@
-import "./adminNavbar.scss"
 import { Link, Outlet } from "react-router-dom";
 import Connected from "../../navbar/connected/Connected";
 import { useState } from "react";
@@ -18,15 +17,16 @@ export default function Navbar() {
         // perform search if text is different from ""
         // else redirect to home
         if(text.length > 0)
-            navigate('/films/' + type[1].name + '/' + text);
+            navigate('/admin/films/' + type[1].name + '/' + text);
         else
-            navigate('/');
+            navigate('/admin/');
     }
 
     return (
         <div className="navbar">
             <div className="wrapper">
                 <div className="left">
+                    <div className="admin">Admin</div>
                     <a href="" className="logo">
                         Pay per view
                     </a>
@@ -36,7 +36,7 @@ export default function Navbar() {
                     <div className="text">
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/admin/">Home</Link>
                             </li>
                             <li onClick={() => setShowSearchBar(!showSearchBar)}>
                                 <a>Search</a>

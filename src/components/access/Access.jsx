@@ -36,6 +36,7 @@ export default function Access() {
             setTimeout(() => setErrorMsg(""), 5000);
         }
         },[]);
+
     const login = (e) => {
         e.preventDefault()
         // get request
@@ -62,7 +63,11 @@ export default function Access() {
                     window.sessionStorage.removeItem('linkto');
                  }
                  else{
-                    navigate('/');
+                    // choose route if Admin or not 
+                    if(response.data[0].isAdmin)
+                        navigate('/admin');
+                    else
+                        navigate('/');
                  }
                 
                 // refresh page in order reload navabar component 

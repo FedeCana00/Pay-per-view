@@ -9,7 +9,7 @@ export default function AdminHome() {
     // execute one time
     useEffect(() => {
         
-        navigate('/films/' + type[2].name + '/');
+        navigate('/admin/films/' + type[2].name + '/Films');
 
     }, []);
 

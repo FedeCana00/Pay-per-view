@@ -25,9 +25,9 @@ function App() {
             <Route path="/payment" element={<Payment/>}/>
           </Route>
 
-        <Route path="/admin" element={<AdminNavbar />}>
+        <Route path="/admin/" element={<AdminNavbar />}>
           <Route index element={<AdminHome />}/>
-          <Route path="admin/films/:t/:param" element={<Films_Result />}/>
+          <Route path="/admin/films/:t/:param" element={<Films_Result />}/>
         </Route>
       </Routes>
     </BrowserRouter>
