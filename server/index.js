@@ -209,7 +209,9 @@ app.post('/payment',(req,res)=>{
       res.send("Transaction inserted into DB!");
     }
   })
+  db.end();
 })
+
 
 app.get("/alreadyowned", (req, res) => {
   const db = mysql.createConnection(config);

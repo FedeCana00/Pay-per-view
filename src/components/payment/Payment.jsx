@@ -16,7 +16,6 @@ const Payment = () => {
     // used to show success message
   const [successMsg, setSuccessMsg] = useState("");
   const getMovieInfo= ()=>{
-    console.log(window.sessionStorage.getItem('linkto'))
     axios.get('http://localhost:3001/film',{
             params: {
               id:window.sessionStorage.getItem('linkto')
@@ -36,15 +35,16 @@ const Payment = () => {
   const submit=(e)=>{
     
     e.preventDefault();
-    if(!checkFields())
-            return;
+    if(!checkFields()){
+      return;}
     axios.post('http://localhost:3001/payment', {
       idFilm:window.sessionStorage.getItem('linkto'),
       idUser:window.sessionStorage.getItem('id'),
       prezzo:prezzo
         }).then((response)=>{
-          if(response.status===201){
+          if(response.status!==201){
             setSuccessMsg("Registration was successful!");
+            setTimeout(() => setSuccessMsg(""), 5000);
             navigate("/")
           }
         });
@@ -56,6 +56,7 @@ const Payment = () => {
   function checkFields(){
     setErrorMsg("");
     let msg = "";
+    let err=0
     
     if(cardnumber.length <= 0)
         msg += "cardnumber is empty! \n";
@@ -71,21 +72,23 @@ const Payment = () => {
                 idUser:window.sessionStorage.getItem('id')
             }
         }).then((response) => {
-          console.log(response)
-            if(response.data !== undefined){
-                msg += "Movie already owned!\n";
+          console.log(response.data.length)
+            if(response.data.length > 0){
+              console.log('prova');
+              msg += "Movie already owned!\n";
+              err=1;
             }
         });
     }
     if(isNaN(Date.parse(dataScadenza)))
         msg += "Date is wrong!\n";
-
+    console.log('msg:'+msg)
     setErrorMsg(msg);
 
     // reset error message after 5 seconds
     setTimeout(() => setErrorMsg(""), 5000);
-
-    return msg.length == 0;
+    
+    return msg.length === 0;
 }
   return (
     <div className='payment'>
