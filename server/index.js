@@ -196,26 +196,9 @@ app.get("/films/newReleases", (req, res) => {
 app.post('/payment',(req,res)=>{
   const db = mysql.createConnection(config);
   const idFilm= req.query.idFilm;
-  const email= req.query.email;
-  const password= req.query.password;
-  const prezzo=""
-  const idUser=""
-  db.query("SELECT id FROM persona WHERE email = ? AND password =?", [email,password],
-    (err, result) => {
-      if(err){
-        console.log(err);
-      } else {
-        idUser= result;
-      }
-    });
-  db.query("SELECT prezzo FROM film WHERE id = ?", [idFilm],
-    (err, result) => {
-      if(err){
-        console.log(err);
-      } else {
-        prezzo= result;
-      }
-    });
+  const idUser= req.query.idUser;
+  const prezzo=req.query.prezzo;
+
   
   db.query("INSERT INTO acquisto (idFilm,idUser,prezzo) VALUES (?,?,?)", [idFilm,idUser,prezzo],
   (err, result)=>{
@@ -227,6 +210,22 @@ app.post('/payment',(req,res)=>{
     }
   })
 })
+
+app.get("/alreadyowned", (req, res) => {
+  const db = mysql.createConnection(config);
+
+    db.query("SELECT * FROM acquisto WHERE idFilm = ? AND idUser= ?", [req.query.idFilm, req.query.idUser],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
+});
 
 
 
