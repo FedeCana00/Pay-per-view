@@ -195,9 +195,9 @@ app.get("/films/newReleases", (req, res) => {
 
 app.post('/payment',(req,res)=>{
   const db = mysql.createConnection(config);
-  const idFilm= req.query.idFilm;
-  const idUser= req.query.idUser;
-  const prezzo=req.query.prezzo;
+  const idFilm= req.body.idFilm;
+  const idUser= req.body.idUser;
+  const prezzo=req.body.prezzo;
 
   
   db.query("INSERT INTO acquisto (idFilm,idUser,prezzo) VALUES (?,?,?)", [idFilm,idUser,prezzo],
@@ -213,7 +213,7 @@ app.post('/payment',(req,res)=>{
 
 app.get("/alreadyowned", (req, res) => {
   const db = mysql.createConnection(config);
-
+  console.log(req.query.idFilm, req.query.idUser)
     db.query("SELECT * FROM acquisto WHERE idFilm = ? AND idUser= ?", [req.query.idFilm, req.query.idUser],
     (err, result) => {
       if(err){
