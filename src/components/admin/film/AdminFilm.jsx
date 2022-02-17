@@ -57,10 +57,17 @@ export default function AdminFilm(){
                     </div>
                     <br /><br/>
                     <div className="admin_part">
-                        Last update done by {window.sessionStorage.getItem("email")}
-
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <b>Price:</b> {film.prezzo} €
+                        <br/>
+                        Last update done by <b>{window.sessionStorage.getItem("email")}</b>
+                        <div className="buttons_section">
+                            <div className="edit">
+                                <button>Edit</button>
+                            </div>
+                            <div className="delete">
+                                <button>Delete</button>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
