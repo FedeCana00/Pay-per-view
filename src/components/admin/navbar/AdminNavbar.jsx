@@ -41,6 +41,9 @@ export default function Navbar() {
                             <li onClick={() => setShowSearchBar(!showSearchBar)}>
                                 <a>Search</a>
                             </li>
+                            <li>
+                                <Link to="/admin/sales">Sales</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>

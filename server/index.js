@@ -231,6 +231,25 @@ app.get("/alreadyowned", (req, res) => {
 });
 
 
+// get all sales
+app.get("/sales", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  // order by data desc
+  db.query("SELECT f.locandina, f.nome, p.email, a.data, a.prezzo" +
+          " FROM acquisto as a, film as f, persona as p WHERE a.idFilm = f.id " + 
+          "AND a.idUser = p.id order by a.data DESC",
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
+  db.end();
+});
 
 
 app.listen(PORT, () => {
