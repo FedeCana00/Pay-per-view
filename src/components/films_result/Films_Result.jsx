@@ -23,6 +23,9 @@ export default function Films_Result() {
             case type[1].name:
                 searchByName();
                 break;
+            case type[2].name:
+                searchAll();
+                break;
         }
     }, [param]);
 
@@ -55,6 +58,25 @@ export default function Films_Result() {
                 name: param
             }
         }).then((response) => {
+            if(response.data === null){
+                setNotFound(true);
+                console.log("Error! Film not found!"); 
+            } else{
+                if(response.data.length > 0){
+                    setFilms(response.data);
+                    setNotFound(false);
+                } else {
+                    setFilms([]);
+                    setNotFound(true);
+                }
+            }
+        });
+    }
+
+    // search all films (admin)
+    function searchAll(){
+        axios.get("http://localhost:3001/films/searchAll", {}
+        ).then((response) => {
             if(response.data === null){
                 setNotFound(true);
                 console.log("Error! Film not found!"); 

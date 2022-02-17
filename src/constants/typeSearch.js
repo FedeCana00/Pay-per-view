@@ -6,5 +6,8 @@ export const type = [
     },
     {
         name: "search"
+    },
+    {
+        name: "all"
     }
 ];

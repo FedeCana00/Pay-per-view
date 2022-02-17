@@ -159,6 +159,23 @@ app.get("/films/searchName", (req, res) => {
     db.end();
 });
 
+// get all films order by name
+app.get("/films/searchAll", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  db.query("SELECT * FROM film ORDER BY nome",
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
+  db.end();
+});
+
 // get new releases films
 app.get("/films/newReleases", (req, res) => {
   const db = mysql.createConnection(config);
