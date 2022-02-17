@@ -53,7 +53,8 @@ export default function Access() {
                 setTimeout(() => setSuccessMsg(""), 5000);
 
                 //TODO io creerei una classe con tutti i dati tranne la password (o con?), più la lista dei film
-                saveUserInSessionStorage(response.data)
+                saveEmailInSessionStorage();
+                savePasswordInSessionStorage()
                  // go to home page
                  if(window.sessionStorage.getItem('linkto')){
                     
@@ -144,17 +145,6 @@ export default function Access() {
     // save email of user connected
     function saveEmailInSessionStorage(){
         window.sessionStorage.setItem('email', lEmail);      
-    }
-    function saveUserInSessionStorage(userdata){
-        axios.get("http://localhost:3001/userinventory", {
-            params: {
-                id: userdata.id
-            }
-        }).then((response) => {
-            window.sessionStorage.setItem('user',
-         new User(userdata.id,userdata.nome,userdata.cognome,userdata.email,userdata.password,userdata.datanascita, userdata.isAdmin, response.data));
-        });
-        
     }
 
     function savePasswordInSessionStorage(){
