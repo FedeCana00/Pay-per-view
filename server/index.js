@@ -146,7 +146,7 @@ app.get("/films/genere", (req, res) => {
 app.get("/films/searchName", (req, res) => {
     const db = mysql.createConnection(config);
 
-    db.query("SELECT * FROM film WHERE nome LIKE '?%' ",req.query.name,
+    db.query("SELECT * FROM film WHERE nome LIKE ? ",req.query.name+'%',
     (err, result) => {
       if(err){
         console.log(err);
