@@ -70,8 +70,8 @@ export default function Navbar() {
 
             {/* Box of genere */}
             <div className={`box ${showGeneres ? "active" : ""}`}>
-                {generes.map((d) => (
-                    <Link to={"/films/" + type[0].name + "/" + d.name}>
+                {generes.map((d, key) => (
+                    <Link to={"/films/" + type[0].name + "/" + d.name} key={key}>
                         {d.name}
                     </Link>
                 ))}

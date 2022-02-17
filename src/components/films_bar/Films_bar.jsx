@@ -76,8 +76,8 @@ export default function Films_bar({show}) {
                 <button id="show more">Show more</button>
             </div>
             <div className="container">
-                {films.map((d) => (
-                    <Link to={"/film/" + d.id}>
+                {films.map((d, key) => (
+                    <Link to={"/film/" + d.id} key={key}>
                         <div className="card">
                             <img src={d.locandina} />
                             <div className="info">
