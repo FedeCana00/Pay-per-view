@@ -7,9 +7,10 @@ import Payment from "./components/payment/Payment";
 import {Personal} from "./components/personal/Personal"
 import Films_Result from "./components/films_result/Films_Result";
 import AdminNavbar from "./components/admin/navbar/AdminNavbar";
-import AdminHome from "./components/admin/adminHome/AdminHome";
+import AdminHome from "./components/admin/home/AdminHome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { type } from "./constants/typeSearch";
+import AdminFilm from "./components/admin/film/AdminFilm";
+
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
 
         <Route path="/admin/" element={<AdminNavbar />}>
           <Route index element={<AdminHome />}/>
-          <Route path="/admin/films/:t/:param" element={<Films_Result />}/>
+          <Route path="/admin/film/:id" element={<AdminFilm />}/>
         </Route>
       </Routes>
     </BrowserRouter>

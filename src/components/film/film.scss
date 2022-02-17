@@ -52,6 +52,17 @@
             .plot{
                 font-size: small;
             }
+
+            .admin_part{
+                float: inline-end;
+
+                .buttons_section{
+                    display: flex;
+                    flex-direction: row;
+                    justify-items: center;
+                    align-items: center;
+                }
+            }
         }
 
         button{

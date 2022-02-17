@@ -92,8 +92,11 @@ export default function Films_Result() {
         });
     }
 
-    function goToFilmPage(){
+    function goToFilmPage(id){
+        if(!window.sessionStorage.getItem('isAdmin') || window.sessionStorage.getItem('isAdmin') == null)
+            return "/film/" + id;
         
+        return "/admin/film/" + id;
     }
 
     return (
@@ -102,8 +105,8 @@ export default function Films_Result() {
                 <div className="title-name">{param}</div>
             </div>
             <div className="container">
-                {films.map((d) => (
-                    <Link to={"/film/" + d.id}>
+                {films.map((d, key) => (
+                    <Link to={() => goToFilmPage(d.id)} key={key}>
                         <div className="card">
                             <img src={d.locandina} />
                             <div className="info">
