@@ -43,7 +43,7 @@ const Payment = () => {
       idUser:window.sessionStorage.getItem('id'),
       prezzo:prezzo
         }).then((response)=>{
-          if(response.status!==201){
+          if(response.status===201){
             setSuccessMsg("Registration was successful!");
             navigate("/")
           }
