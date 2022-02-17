@@ -49,12 +49,15 @@ export default function Access() {
             console.log(response.data.length);
             if(response.data.length > 0){
                 setSuccessMsg("Logged in successfully!");
-
+                const id= response.data[0].id
+                const isAdmin=response.data[0].isAdmin
                 // reset success message after 5 seconds
                 setTimeout(() => setSuccessMsg(""), 5000);
 
                 //TODO io creerei una classe con tutti i dati tranne la password (o con?), più la lista dei film
                 saveEmailInSessionStorage();
+                saveIdInSessionStorage(id);
+                saveIsAdminIdInSessionStorage(isAdmin)
                 savePasswordInSessionStorage()
                  // go to home page
                  if(window.sessionStorage.getItem('linkto')){
@@ -151,7 +154,12 @@ export default function Access() {
     function saveEmailInSessionStorage(){
         window.sessionStorage.setItem('email', lEmail);      
     }
-
+    function saveIsAdminIdInSessionStorage(isAdmin){
+        window.sessionStorage.setItem('isAdmin', isAdmin);
+    }
+    function saveIdInSessionStorage(id){
+        window.sessionStorage.setItem('id', id);
+    }
     function savePasswordInSessionStorage(){
         window.sessionStorage.setItem('password', lPassword);
     }
