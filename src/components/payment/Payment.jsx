@@ -5,6 +5,7 @@ import { useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+
 const Payment = () => {
   const navigate = useNavigate();
   const [cardnumber,setCardnumber]= useState('')
@@ -15,28 +16,32 @@ const Payment = () => {
   const [errorMsg, setErrorMsg] = useState("");
     // used to show success message
   const [successMsg, setSuccessMsg] = useState("");
+
+  // get movies to buy from database
   const getMovieInfo= ()=>{
     axios.get('http://localhost:3001/film',{
             params: {
               id:window.sessionStorage.getItem('linkto')
             }
         }).then((response)=>{
-          
-          if (response.data.length>0){
-            setPrezzo(response.data[0].prezzo)
-            
-          }
+          if (response.data.length > 0)
+            setPrezzo(response.data[0].prezzo) 
         });
-    
   }
+
+  // execute only one time
   useEffect(()=>{
     getMovieInfo()
   },[])
+
+  // submit payment from form
   const submit=(e)=>{
-    
     e.preventDefault();
-    if(!checkFields()){
-      return;}
+
+    // used to check the correct fillment
+    if(!checkFields())
+      return;
+
     axios.post('http://localhost:3001/payment', {
       idFilm:window.sessionStorage.getItem('linkto'),
       idUser:window.sessionStorage.getItem('id'),
@@ -53,10 +58,10 @@ const Payment = () => {
   }
 
   // check fields before insert into database
-  function checkFields(){
+  // async function => in order to use key word await
+  async function checkFields(){
     setErrorMsg("");
     let msg = "";
-    let err=0
     
     if(cardnumber.length <= 0)
         msg += "cardnumber is empty! \n";
@@ -64,24 +69,24 @@ const Payment = () => {
         msg += "Holder is empty!\n";
     if(cvc.length <= 0)
         msg += "CVC is empty!\n";
-    else{ // TODO: wait the response before show message
-        // get request
-        axios.get("http://localhost:3001/alreadyowned", {
+    else{
+        // get request and wiat for the response
+        const response = await axios.get("http://localhost:3001/alreadyowned", {
             params: {
                 idFilm: window.sessionStorage.getItem('linkto'),
                 idUser:window.sessionStorage.getItem('id')
             }
-        }).then((response) => {
-          console.log(response.data.length)
-            if(response.data.length > 0){
-              console.log('prova');
-              msg += "Movie already owned!\n";
-              err=1;
-            }
         });
+
+        console.log(response.data.length)
+          if(response.data.length > 0){
+            msg += "Movie already owned!\n";
+          }
     }
+
     if(isNaN(Date.parse(dataScadenza)))
         msg += "Date is wrong!\n";
+
     console.log('msg:'+msg)
     setErrorMsg(msg);
 
@@ -89,7 +94,8 @@ const Payment = () => {
     setTimeout(() => setErrorMsg(""), 5000);
     
     return msg.length === 0;
-}
+  }
+
   return (
     <div className='payment'>
       <div className='form'>

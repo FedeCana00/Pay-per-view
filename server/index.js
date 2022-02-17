@@ -215,8 +215,9 @@ app.post('/payment',(req,res)=>{
 
 app.get("/alreadyowned", (req, res) => {
   const db = mysql.createConnection(config);
-  console.log(req.query.idFilm, req.query.idUser)
-    db.query("SELECT * FROM acquisto WHERE idFilm = ? AND idUser= ?", [req.query.idFilm, req.query.idUser],
+  console.log(req.query.idFilm, req.query.idUser);
+  
+  db.query("SELECT * FROM acquisto WHERE idFilm = ? AND idUser= ?", [req.query.idFilm, req.query.idUser],
     (err, result) => {
       if(err){
         console.log(err);
