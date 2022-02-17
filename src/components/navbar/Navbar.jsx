@@ -64,7 +64,7 @@ export default function Navbar() {
                     </div>
                 </div>
                 <div className="right">
-                    {window.sessionStorage.getItem('email') === null ? <Disconnected /> : <Connected />}
+                    {window.sessionStorage.getItem('user') === null ? <Disconnected /> : <Connected />}
                 </div>
             </div>
 

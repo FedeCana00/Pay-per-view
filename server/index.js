@@ -109,6 +109,22 @@ app.get("/film", (req, res) => {
     db.end();
 });
 
+app.get("/userinventory", (req, res) => {
+  const db = mysql.createConnection(config);
+    
+    db.query("SELECT * FROM film INNER JOIN acquisto ON acquisto.idUser = ? and acquisto.idFilm=film.id", [req.query.id],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
+});
+
 // get films from genere
 app.get("/films/genere", (req, res) => {
     const db = mysql.createConnection(config);
