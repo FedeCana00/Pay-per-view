@@ -28,6 +28,7 @@ function App() {
 
         <Route path="/admin/" element={<AdminNavbar />}>
           <Route index element={<AdminHome />}/>
+          <Route path="/admin/films/:t/:param" element={<Films_Result />}/>
           <Route path="/admin/film/:id" element={<AdminFilm />}/>
         </Route>
       </Routes>

@@ -106,7 +106,7 @@ export default function Films_Result() {
             </div>
             <div className="container">
                 {films.map((d, key) => (
-                    <Link to={() => goToFilmPage(d.id)} key={key}>
+                    <Link to={goToFilmPage(d.id)} key={key}>
                         <div className="card">
                             <img src={d.locandina} />
                             <div className="info">

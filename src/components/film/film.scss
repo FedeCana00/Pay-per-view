@@ -54,13 +54,27 @@
             }
 
             .admin_part{
-                float: inline-end;
+                align-items: center;
+                justify-content: center;
+                font-size: small;
 
                 .buttons_section{
                     display: flex;
                     flex-direction: row;
                     justify-items: center;
                     align-items: center;
+
+                    .edit{
+                        button{
+                            background-color:darkgoldenrod;
+                        }
+                    }
+
+                    .delete{
+                        button{
+                            background-color: $red;
+                        }
+                    }
                 }
             }
         }
