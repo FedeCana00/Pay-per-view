@@ -23,7 +23,7 @@ export default function Connected() {
             <div className="user">
                 <Link to="/personal">
                     <button>
-                    {window.sessionStorage.getItem('user').email}
+                    {window.sessionStorage.getItem('email')}
                     </button>
                 </Link>
                 
