@@ -26,6 +26,11 @@ export default function Sales() {
         });
     }
 
+    // used to convert date in a readable format
+    function getDate(date){
+        return date.substring(0, 10) + " " + date.substring(11, 16);
+    }
+
     return(
         <div className="sales">
             <div className="title">Sales</div>
@@ -35,7 +40,7 @@ export default function Sales() {
                     <img src={d.locandina} alt="" />
                     <div className="sale_info">{d.nome}</div>
                     <div className="sale_info">{d.email}</div>
-                    <div className="sale_info">{d.data}</div>
+                    <div className="sale_info">{getDate(d.data)}</div>
                     <div className="sale_price">{d.prezzo} €</div>
                 </div>
             ))}

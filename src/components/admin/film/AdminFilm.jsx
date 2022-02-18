@@ -40,6 +40,13 @@ export default function AdminFilm(){
             }
         });
     }, []);
+
+    // convert int date into readable string date
+    function getDate(date){
+        return date.toString().substring(0, 4) + "-"
+            + date.toString().substring(4, 6) + "-"
+            + date.toString().substring(6, 8);
+    }
  
     return (
         <div className="film">
@@ -49,7 +56,7 @@ export default function AdminFilm(){
                 </div>
                 <div className="right">
                     <div className="title">{film.nome}</div>
-                    <div className="data">{film.datauscita} {film.durata} minutes</div>
+                    <div className="data">{getDate(film.datauscita)} {film.durata} minutes</div>
                     <div className="genere">{film.genere}</div>
                     <br/><br/>
                     <div className="plot">
