@@ -67,13 +67,14 @@
             margin-bottom: 10px;
         }
     
-        input{
+        select, input, textarea{
             border: none;
             height: auto;
             width: 220px;
             font-size: medium;
             padding: 5px;
             border-radius: 12px;
+            resize: none;
             
             box-shadow: 5px 5px 5px grey;
         }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { typeOfManagement } from "../filmManagement";
 
 export default function AdminFilm(){
     const navigate= useNavigate()
@@ -50,6 +51,17 @@ export default function AdminFilm(){
             + date.toString().substring(4, 6) + "-"
             + date.toString().substring(6, 8);
     }
+
+    // delete film from database
+    function deleteFilm(){
+        axios.delete(`http://localhost:3001/film/delete/${id}`).then((response) => {
+            if(response.data === null)
+                console.log("Error! Film not found!");
+            else
+                // navigate to home page
+                navigate('/admin/');
+        });
+    }
  
     return (
         <div className="film">
@@ -72,10 +84,10 @@ export default function AdminFilm(){
                         Last update done by <b>{window.sessionStorage.getItem("email")}</b>
                         <div className="buttons_section">
                             <div className="edit">
-                                <button>Edit</button>
+                                <button onClick={() => navigate("/admin/" + typeOfManagement[1].name + "/" + film.id)}>Edit</button>
                             </div>
                             <div className="delete">
-                                <button>Delete</button>
+                                <button onClick={() => deleteFilm()}>Delete</button>
                             </div>
                         </div>
                     </div>

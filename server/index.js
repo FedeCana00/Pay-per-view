@@ -255,6 +255,82 @@ app.get("/sales", (req, res) => {
   db.end();
 });
 
+// insert new film in database
+app.post('/film/add',(req,res)=>{
+  const db = mysql.createConnection(config);
+
+  const name = req.body.name;
+  const genere = req.body.genere;
+  const plot = req.body.plot;
+  const date = req.body.date;
+  const price = req.body.price;
+  const duration = req.body.duration;
+  const image = req.body.image;
+  const file = req.body.file;
+  const idAdmin = req.body.idAdmin;
+  
+  db.query("INSERT INTO film (nome,genere,trama, datauscita, prezzo, "
+          + "durata, file, locandina, idAdmin) VALUES (?,?,?,?,?,?,?,?,?)", 
+          [name,genere,plot, date, price, duration, file, image, idAdmin],
+  (err, result)=>{
+    if(err)
+      console.log(err);
+    else {
+      res.status(201);
+      res.send("Transaction inserted into DB!");
+    }
+  })
+  // close connection to database
+  db.end();
+});
+
+
+// edit film in database
+app.post('/film/edit',(req,res)=>{
+  const db = mysql.createConnection(config);
+
+  const id = req.body.id;
+  const name = req.body.name;
+  const genere = req.body.genere;
+  const plot = req.body.plot;
+  const date = req.body.date;
+  const price = req.body.price;
+  const duration = req.body.duration;
+  const image = req.body.image;
+  const file = req.body.file;
+  const idAdmin = req.body.idAdmin;
+  
+  db.query("UPDATE film SET nome = '" + [name] + "', genere = '" + [genere] + 
+          "', trama = '" + [plot] + "', datauscita = " + [date] + ", prezzo = " + [price] +
+          ", durata = " + [duration] + ", file = '" + [file] + "', locandina = '" + [image] +
+          "', idAdmin = " + [idAdmin] + " WHERE id = " + [id],
+    (err, result)=>{
+      if(err)
+        console.log(err);
+      else {
+        res.status(201);
+        res.send("Transaction inserted into DB!");
+      }
+  });
+  // close connection to database
+  db.end();
+});
+
+// delete film in database
+app.delete('/film/delete/:id',(req,res)=>{
+  const db = mysql.createConnection(config);
+
+  const id = req.params.id;
+  db.query("DELETE FROM film WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+  // close connection to database
+  db.end();
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
