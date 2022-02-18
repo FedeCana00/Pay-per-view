@@ -233,7 +233,23 @@ app.get("/alreadyowned", (req, res) => {
 });
 
 app.get("/getfile",(req,res)=>{
-  res.download('movies/avengersinfinitywar.mp4')
+  const db = mysql.createConnection(config);
+  console.log(req.query.id)
+  db.query("SELECT file FROM film WHERE id = ?", [req.query.id],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        Object.keys(result).forEach(function(key) {
+          var row = result[key];
+          res.download(row.file)
+        });
+      }
+    });
+
+    // close connection
+    db.end();
+
 })
 // get all sales
 app.get("/sales", (req, res) => {
