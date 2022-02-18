@@ -35,11 +35,12 @@ const Payment = () => {
   },[])
 
   // submit payment from form
-  const submit=(e)=>{
+  async function submit(e){
     e.preventDefault();
 
     // used to check the correct fillment
-    if(!checkFields())
+    let c = await checkFields();
+    if(!c)
       return;
 
     axios.post('http://localhost:3001/payment', {
@@ -106,7 +107,7 @@ const Payment = () => {
             <img src='/assets/payment.png' alt='payment'/>
           </div>
 
-          <form className='creditcard' onSubmit={submit}>
+          <form className='creditcard' onSubmit={(event) => submit(event)}>
             <label>Card Number</label>
             <input type="text" pattern="[\d| ]{16,22}" placeholder="Card Number" onChange={(event) => {setCardnumber(event.target.value)}}/>
             <label>Holder name:</label>
