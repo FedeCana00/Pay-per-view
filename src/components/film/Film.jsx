@@ -6,12 +6,21 @@ import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 export default function Film(){
+    const FileDownload= require('js-file-download')
     const navigate= useNavigate()
+ 
+    
     const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
     const[bought, setBought] =useState(0)
     // convert int date into readable string date
+    const downloadMovie= async ()=>{
+        axios.get("http://localhost:3001/getfile")
+   .then((response) => {
+        FileDownload(response.data, film.nome+'.mp4');
+    });
+    }
     function getDate(date){
         if(date == null)
             return "yyyy-mm-dd";
@@ -80,9 +89,8 @@ export default function Film(){
                 </Link>
         }
         else{
-            return<Link to="/payment">
-                <button onClick={()=>setSessionstorage()}>Download the Movie</button>
-                </Link>
+            return<button onClick={()=>downloadMovie()}>Download the Movie</button>
+
         }
     }
  

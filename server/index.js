@@ -232,7 +232,9 @@ app.get("/alreadyowned", (req, res) => {
     db.end();
 });
 
-
+app.get("/getfile",(req,res)=>{
+  res.download('movies/avengersinfinitywar.mp4')
+})
 // get all sales
 app.get("/sales", (req, res) => {
   const db = mysql.createConnection(config);
