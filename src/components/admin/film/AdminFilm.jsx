@@ -43,6 +43,9 @@ export default function AdminFilm(){
 
     // convert int date into readable string date
     function getDate(date){
+        if(date == null)
+            return "yyyy-mm-dd";
+
         return date.toString().substring(0, 4) + "-"
             + date.toString().substring(4, 6) + "-"
             + date.toString().substring(6, 8);
