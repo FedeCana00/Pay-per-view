@@ -46,7 +46,7 @@ export default function Navbar() {
                                 <Link to="/admin/sales">Sales</Link>
                             </li>
                             <li>
-                                <Link to={"/admin/" + typeOfManagement[0]}>Add film</Link>
+                                <Link to={"/admin/" + typeOfManagement[0].name + "/film"}>Add film</Link>
                             </li>
                         </ul>
                     </div>
