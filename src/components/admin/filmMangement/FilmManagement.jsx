@@ -20,6 +20,8 @@ export default function FilmManagement() {
     const [duration, setDuration] = useState(0);
     const [image, setImage] = useState("");
     const [file, setFile] = useState("");
+    // used to pass value of old film and add update
+    const [oldFilm, setOldFilm] = useState([]);
     // used to show error message
     const [errorMsg, setErrorMsg] = useState("");
     // used to show success message
@@ -43,6 +45,7 @@ export default function FilmManagement() {
                 console.log("Error! Film not found!");
             else{
                 if(response.data.length > 0){
+                    setOldFilm(response.data[0]);
                     setName(response.data[0].nome);
                     setGenere(response.data[0].genere);
                     setPlot(response.data[0].trama);
@@ -107,6 +110,7 @@ export default function FilmManagement() {
     function edit(){
         // post request
         axios.post("http://localhost:3001/film/edit", {
+            oldFilm: oldFilm,
             id: idFilm,
             name: name,
             genere: genere,

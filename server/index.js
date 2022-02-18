@@ -324,13 +324,68 @@ app.post('/film/edit',(req,res)=>{
       if(err)
         console.log(err);
       else {
-        res.status(201);
-        res.send("Transaction inserted into DB!");
+        db.end();
+        const oldFilm = req.body.oldFilm;
+        // delete previous update
+        deleteOldUpdate(oldFilm);
       }
   });
-  // close connection to database
-  db.end();
 });
+
+// delete last update of film
+function deleteOldUpdate(oldFilm){
+  const db = mysql.createConnection(config);
+
+  db.query("DELETE FROM modifica WHERE idFilm = ?", oldFilm.id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // close connection to database
+      db.end();
+      // add update inside database
+      addUpdateOfFilm(oldFilm);
+    }
+  });
+}
+
+// insert new update film with info of last film state
+function addUpdateOfFilm(oldFilm){
+  const db = mysql.createConnection(config);
+
+  const id = oldFilm.id;
+  const name = oldFilm.nome;
+  const genere = oldFilm.genere;
+  const plot = oldFilm.trama;
+  const date = oldFilm.datauscita;
+  const price = oldFilm.prezzo;
+  const duration = oldFilm.durata;
+  const image = oldFilm.locandina;
+  const file = oldFilm.file;
+  const idAdmin = oldFilm.idAdmin;
+
+  //get current date
+  const t = getTodayDate();
+
+  db.query("INSERT INTO modifica (idFilm, idAdmin, data, nome, genere, " 
+          + "trama, datauscita, prezzo, durata, file, locandina) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          [id, idAdmin, t, name, genere, plot, date, price, duration, file, image],
+      (err, result)=>{
+      if(err)
+        console.log(err);
+      else {
+        console.log("Inserted into modifica");
+  }});
+
+  db.end();
+}
+
+function getTodayDate(){
+  // get today date
+  var today = new Date();
+  var string = today.getFullYear() + String(today.getMonth() + 1).padStart(2, '0')
+    + String(today.getDate()).padStart(2, '0');
+  return parseInt(string);
+}
 
 // delete film in database
 app.delete('/film/delete/:id',(req,res)=>{
@@ -345,6 +400,26 @@ app.delete('/film/delete/:id',(req,res)=>{
     }
   });
   // close connection to database
+  db.end();
+});
+
+// get update of film
+app.get("/update/:id", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  const id = req.params.id;
+
+  // order by data desc
+  db.query("SELECT * FROM modifica WHERE idFilm = ?", [id],
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
   db.end();
 });
 
