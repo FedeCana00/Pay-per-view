@@ -112,7 +112,9 @@ app.get("/film", (req, res) => {
 app.get("/userinventory", (req, res) => {
   const db = mysql.createConnection(config);
     
-    db.query("SELECT * FROM film INNER JOIN acquisto ON acquisto.idUser = ? and acquisto.idFilm=film.id", [req.query.id],
+    db.query("SELECT f.*, a.data, a.prezzo" +
+    " FROM acquisto as a, film as f WHERE a.idFilm = f.id " + 
+    "AND a.idUser = ?", [req.query.id],
     (err, result) => {
       if(err){
         console.log(err);

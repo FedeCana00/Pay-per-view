@@ -10,7 +10,15 @@ export default function Film(){
     const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
+    // convert int date into readable string date
+    function getDate(date){
+        if(date == null)
+            return "yyyy-mm-dd";
 
+        return date.toString().substring(0, 4) + "-"
+            + date.toString().substring(4, 6) + "-"
+            + date.toString().substring(6, 8);
+    }
     // execute only one time
     useEffect(() => {
         window.sessionStorage.removeItem('linkto');
@@ -67,7 +75,7 @@ export default function Film(){
                 </div>
                 <div className="right">
                     <div className="title">{film.nome}</div>
-                    <div className="data">{film.datauscita} {film.durata} minutes</div>
+                    <div className="data">{getDate(film.datauscita)} {film.durata} minutes</div>
                     <div className="genere">{film.genere}</div>
                     <br/><br/>
                     <div className="plot">
