@@ -10,6 +10,7 @@ export default function Film(){
     const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
+    const[bought, setBought] =useState(0)
     // convert int date into readable string date
     function getDate(date){
         if(date == null)
@@ -47,6 +48,19 @@ export default function Film(){
                     });
             }
         });
+        if (window.sessionStorage.getItem('id')!==null){
+            axios.get("http://localhost:3001/alreadyowned",{
+                params:{
+                    idFilm: id,
+                    idUser:window.sessionStorage.getItem('id')
+                }
+            }).then((response)=>{
+                if(response.data === null)
+                    setBought(0)
+                else setBought(1)
+            })
+        }
+        
     }, []);
     const setSessionstorage=()=>{
         window.sessionStorage.setItem('linkto',id);
@@ -59,10 +73,15 @@ export default function Film(){
                 </Link>
             
         }
-        else{
+        else if (bought===0){
             
             return<Link to="/payment">
                 <button onClick={()=>setSessionstorage()}>Buy in 4k {film.prezzo} €</button>
+                </Link>
+        }
+        else{
+            return<Link to="/payment">
+                <button onClick={()=>setSessionstorage()}>Download the Movie</button>
                 </Link>
         }
     }
