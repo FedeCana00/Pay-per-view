@@ -16,9 +16,49 @@
 
     form{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
         margin: 20px;
+
+        .left{
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+        }
+
+        .right{
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+
+            .box-upload{
+                display: flex;
+                flex-direction: row;
+                margin: 20px;
+                align-items: center;
+
+                .left{
+                    display: flex;
+                    flex-direction: column;
+                    margin: 20px;
+                }
+
+                .right{
+                    display: flex;
+                    flex-direction: column;
+                    margin: 20px;
+                }
+
+                img{
+                    width: 100px;
+                }
+
+                video{
+                    width: auto;
+                    height: 120px;
+                }
+            }
+        }
 
         label{
             font-size: large;
@@ -39,7 +79,7 @@
         }
     
         button{
-            width: 220px;
+            width: 100%;
             padding: 5px;
             font-size: medium;
             background-color: green;
