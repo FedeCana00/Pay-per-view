@@ -11,6 +11,7 @@ import AdminHome from "./components/admin/home/AdminHome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminFilm from "./components/admin/film/AdminFilm";
 import Sales from "./components/admin/sales/Sales";
+import FilmManagement from "./components/admin/filmMangement/FilmManagement";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/admin/films/:t/:param" element={<Films_Result />}/>
           <Route path="/admin/film/:id" element={<AdminFilm />}/>
           <Route path="/admin/sales" element={<Sales />}/>
+          <Route path="/admin/:type/:idFilm" element={<FilmManagement />}/>
         </Route>
       </Routes>
     </BrowserRouter>

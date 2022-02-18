@@ -3,6 +3,7 @@ import Connected from "../../navbar/connected/Connected";
 import { useState } from "react";
 import { type } from "../../../constants/typeSearch";
 import { useNavigate } from 'react-router-dom';
+import { typeOfManagement } from "../filmManagement";
 
 export default function Navbar() {
     const [showSearchBar, setShowSearchBar] = useState(false);
@@ -43,6 +44,9 @@ export default function Navbar() {
                             </li>
                             <li>
                                 <Link to="/admin/sales">Sales</Link>
+                            </li>
+                            <li>
+                                <Link to={"/admin/" + typeOfManagement[0]}>Add film</Link>
                             </li>
                         </ul>
                     </div>
