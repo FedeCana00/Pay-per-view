@@ -42,13 +42,12 @@ const Payment = () => {
     let c = await checkFields();
     if(!c)
       return;
-
     axios.post('http://localhost:3001/payment', {
       idFilm:window.sessionStorage.getItem('linkto'),
       idUser:window.sessionStorage.getItem('id'),
       prezzo:prezzo
         }).then((response)=>{
-          if(response.status!==201){
+          if(response.status===201){
             setSuccessMsg("Registration was successful!");
             setTimeout(() => setSuccessMsg(""), 5000);
             navigate("/")
@@ -79,7 +78,7 @@ const Payment = () => {
             }
         });
 
-        console.log(response.data.length)
+        
           if(response.data.length > 0){
             msg += "Movie already owned!\n";
           }
@@ -88,7 +87,7 @@ const Payment = () => {
     if(isNaN(Date.parse(dataScadenza)))
         msg += "Date is wrong!\n";
 
-    console.log('msg:'+msg)
+    
     setErrorMsg(msg);
 
     // reset error message after 5 seconds
