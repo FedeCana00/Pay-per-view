@@ -100,4 +100,41 @@
         }
 
     }
+
+    .updateFirst{
+        background-color: $backgroundColor;
+        border-radius: 12px;
+        margin: 20px;
+        padding: 10px;
+        color: black;
+        box-shadow: 5px 5px 5px grey;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+
+        .title{
+            font-size: medium;
+            font-weight: 700;
+            color: inherit;
+        }
+
+        .none{
+            font-size: larger;
+            color: $red;
+            font-weight: 800;
+            margin: 20px;
+        }
+
+        .update-container{
+            margin: 10px;
+
+            .text{
+                margin: 10px;
+                font-size: small;
+                color: inherit;
+            }
+        }
+    }
 }

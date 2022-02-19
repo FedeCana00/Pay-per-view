@@ -9,6 +9,7 @@ import { typeOfManagement } from "../filmManagement";
 export default function AdminFilm(){
     const navigate= useNavigate()
     const [film, setFilm] = useState([]);
+    const [filmUpdateFist, setFilmUpdateFirst] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
 
@@ -40,6 +41,18 @@ export default function AdminFilm(){
                     });
             }
         });
+
+        // get first update of this film
+        axios.get("http://localhost:3001/update/" + id).then((response) => {
+            if(response.data === null)
+                console.log("Error! Film not found!");
+            else{
+                if(response.data.length > 0)
+                    setFilmUpdateFirst(response.data[0]);
+                else
+                    console.log("No updated yet!");
+            }
+        });
     }, []);
 
     // convert int date into readable string date
@@ -61,6 +74,24 @@ export default function AdminFilm(){
                 // navigate to home page
                 navigate('/admin/');
         });
+    }
+
+    // used to print update info or not
+    function updateFirst(){
+        if(filmUpdateFist.length == 0)
+            return (<div className="none">This film hasn't been edited yet!</div>);
+        else
+            return(
+            <div className="update-container">
+                <div className="text"><b>Name:</b> {filmUpdateFist.nome}</div>
+                <div className="text"><b>Genere:</b> {filmUpdateFist.genere}</div>
+                <div className="text"><b>Plot:</b> {filmUpdateFist.trama}</div>
+                <div className="text"><b>Date release:</b> {filmUpdateFist.datauscita}</div>
+                <div className="text"><b>Duration:</b> {filmUpdateFist.durata}</div>
+                <div className="text"><b>Price:</b> {filmUpdateFist.prezzo} €</div>
+                <div className="text"><b>Url file:</b> {filmUpdateFist.file}</div>
+                <div className="text"><b>Url image:</b> {filmUpdateFist.locandina}</div>
+            </div>);
     }
  
     return (
@@ -91,8 +122,13 @@ export default function AdminFilm(){
                             </div>
                         </div>
                     </div>
-                    
                 </div>
+            </div>
+            <div className="updateFirst">
+                <div className="title">
+                    Update first
+                </div>
+                {updateFirst()}
             </div>
         </div>
     );
