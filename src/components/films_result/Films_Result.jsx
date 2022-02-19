@@ -26,6 +26,12 @@ export default function Films_Result() {
             case type[2].name:
                 searchAll();
                 break;
+            case type[3].name:
+                newRelease();
+                break;
+            case type[4].name:
+                bestSeller();
+                break;
         }
     }, [param]);
 
@@ -77,6 +83,46 @@ export default function Films_Result() {
     function searchAll(){
         axios.get("http://localhost:3001/films/searchAll", {}
         ).then((response) => {
+            if(response.data === null){
+                setNotFound(true);
+                console.log("Error! Film not found!"); 
+            } else{
+                if(response.data.length > 0){
+                    setFilms(response.data);
+                    setNotFound(false);
+                } else {
+                    setFilms([]);
+                    setNotFound(true);
+                }
+            }
+        });
+    }
+
+    // search new release
+    function newRelease(){
+        axios.get("http://localhost:3001/films/newReleases", {
+            params: { }
+        }).then((response) => {
+            if(response.data === null){
+                setNotFound(true);
+                console.log("Error! Film not found!"); 
+            } else{
+                if(response.data.length > 0){
+                    setFilms(response.data);
+                    setNotFound(false);
+                } else {
+                    setFilms([]);
+                    setNotFound(true);
+                }
+            }
+        });
+    }
+
+    // search all best seller
+    function bestSeller(){
+        axios.get("http://localhost:3001/films/bestsellers", {
+            params: { }
+        }).then((response) => {
             if(response.data === null){
                 setNotFound(true);
                 console.log("Error! Film not found!"); 

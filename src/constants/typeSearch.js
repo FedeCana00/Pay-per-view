@@ -9,5 +9,11 @@ export const type = [
     },
     {
         name: "all"
+    },
+    {
+        name: "newRelease"
+    },
+    {
+        name: "bestseller"
     }
 ];
