@@ -21,7 +21,7 @@ export default function Connected() {
         <div className="connected">
             <img src="/assets/user.png" alt="user" />
             <div className="user">
-                <Link to="/personal">
+                <Link to={window.sessionStorage.getItem('isAdmin')===0?'/personal':'/admin/personal'}>
                     <button>
                     {window.sessionStorage.getItem('email')}
                     </button>

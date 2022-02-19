@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Film from "./components/film/Film";
 import Payment from "./components/payment/Payment";
 import {Personal} from "./components/personal/Personal"
+import {PersonalAdmin} from "./components/admin/personal/PersonalAdmin"
 import Films_Result from "./components/films_result/Films_Result";
 import AdminNavbar from "./components/admin/navbar/AdminNavbar";
 import AdminHome from "./components/admin/home/AdminHome";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/admin/film/:id" element={<AdminFilm />}/>
           <Route path="/admin/sales" element={<Sales />}/>
           <Route path="/admin/:type/:idFilm" element={<FilmManagement />}/>
+          <Route path="/admin/personal" element={<PersonalAdmin />}/>
         </Route>
       </Routes>
     </BrowserRouter>
