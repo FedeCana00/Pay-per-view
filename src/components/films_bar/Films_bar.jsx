@@ -64,12 +64,8 @@ export default function Films_bar({show}) {
         }).then((response) => {
             if(response.data === null)
                 console.log("Error! Film not found!");
-            else{
-                if(response.data.length > 0)
-                    setFilms(response.data);
-                else 
-                    setFilms([]);
-            }
+            else
+                getResponseAndSetFilms(response);
         });
     }
 
@@ -80,12 +76,8 @@ export default function Films_bar({show}) {
         }).then((response) => {
             if(response.data === null)
                 console.log("Error! Film not found!");
-            else{
-                if(response.data.length > 0)
-                    setFilms(response.data);
-                else 
-                    setFilms([]);
-            }
+            else
+                getResponseAndSetFilms(response);
         });
     }
     // get films by genere
@@ -97,13 +89,23 @@ export default function Films_bar({show}) {
         }).then((response) => {
             if(response.data === null)
                 console.log("Error! Film not found!");
-            else{
-                if(response.data.length > 0)
-                    setFilms(response.data);
-                else 
-                    setFilms([]);
-            }
+            else
+                getResponseAndSetFilms(response);
         });
+    }
+
+    // used to manage response and set films to view
+    function getResponseAndSetFilms(response){
+        if(response.data.length > 0){
+            // get first 7 films not more
+            var max = response.data.length > 7 ? 7 : response.data.length;
+            var mFilms = [];
+            // get item of response and put inside an array
+            for(let i = 0; i < max; i++)
+                mFilms.push(response.data[i]);
+            setFilms(mFilms);
+        } else 
+            setFilms([]);
     }
 
     // used to show price with discount or full price
