@@ -58,6 +58,39 @@
                 justify-content: center;
                 font-size: small;
 
+                .discount_section{
+                    display: flex;
+                    flex-direction: row;
+                    justify-items: center;
+                    align-items: center;
+                    margin: 5px;
+
+                    button{
+                        width: 40px;
+                        background-color: white;
+                        border: none;
+                        color: black;
+                        padding: 10px;
+                        text-align: center;
+                        text-decoration: none;
+                        font-size: small;
+                        font-weight: bold;
+                        border-radius: 0px;
+                        border-style: solid;
+                        border-width: 2px;
+                        border-color: black;
+                        box-shadow: 5px 5px 5px grey;
+                        cursor: pointer;
+                        margin: 5px;
+                
+                        &:hover {
+                            color: darkgoldenrod;
+                            border-color: darkgoldenrod;
+                        }
+                    }
+                    
+                }
+
                 .buttons_section{
                     display: flex;
                     flex-direction: row;

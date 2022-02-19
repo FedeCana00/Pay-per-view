@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { typeOfManagement } from "../filmManagement";
+import { discount } from "./discount";
 
 export default function AdminFilm(){
     const navigate= useNavigate()
@@ -13,7 +14,7 @@ export default function AdminFilm(){
     const [numSales, setNumSales] = useState(0);
     const [earnings, setEarnings] = useState(0);
     // used to get the id passed from the url
-    const { id } = useParams()
+    const { id } = useParams();
 
     // execute only one time
     useEffect(() => {
@@ -121,6 +122,20 @@ export default function AdminFilm(){
                 <div className="text"><b>Admin id:</b> {filmUpdateFist.idAdmin}</div>
             </div>);
     }
+
+    // used to show actual and possibile applicable discounts
+    function showDiscount(value, key){
+        if(value == film.sconto)
+            return <button key={key} style={{color: "#ed3b3b", borderColor: "#ed3b3b"}}>{value}</button>
+        else
+            return <button key={key}>{value}</button>
+    }
+
+
+    // update discount in database
+    function updateDiscount(value){
+
+    }
  
     return (
         <div className="film">
@@ -138,6 +153,10 @@ export default function AdminFilm(){
                     </div>
                     <br /><br/>
                     <div className="admin_part">
+                        <div className="discount_section">
+                            <b>Discount%:</b>
+                            {discount.map((d, key) => showDiscount(d.value, key))}
+                        </div>
                         <b>Price:</b> {film.prezzo} €
                         <br/>
                         Number of films sold: <b>{numSales}</b>
