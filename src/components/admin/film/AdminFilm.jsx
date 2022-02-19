@@ -10,6 +10,8 @@ export default function AdminFilm(){
     const navigate= useNavigate()
     const [film, setFilm] = useState([]);
     const [filmUpdateFist, setFilmUpdateFirst] = useState([]);
+    const [numSales, setNumSales] = useState(0);
+    const [earnings, setEarnings] = useState(0);
     // used to get the id passed from the url
     const { id } = useParams()
 
@@ -53,6 +55,31 @@ export default function AdminFilm(){
                     console.log("No updated yet!");
             }
         });
+
+        // get number of sales of this film
+        axios.get("http://localhost:3001/sales/" + id).then((response) => {
+            if(response.data === null)
+                console.log("Error! Sales not found!");
+            else{
+                if(response.data.length > 0)
+                    setNumSales(response.data[0].sales);
+                else
+                    console.log("No sales found!");
+            }
+        });
+
+        // get earnings of this film
+        axios.get("http://localhost:3001/earnings/" + id).then((response) => {
+            if(response.data === null)
+                console.log("Error! Earnings not found!");
+            else{
+                if(response.data.length > 0)
+                    // approximation to two decimal places
+                    setEarnings(Math.round(response.data[0].earn * 100) / 100);
+                else
+                    console.log("No earnings found!");
+            }
+        });
     }, []);
 
     // convert int date into readable string date
@@ -91,6 +118,7 @@ export default function AdminFilm(){
                 <div className="text"><b>Price:</b> {filmUpdateFist.prezzo} €</div>
                 <div className="text"><b>Url file:</b> {filmUpdateFist.file}</div>
                 <div className="text"><b>Url image:</b> {filmUpdateFist.locandina}</div>
+                <div className="text"><b>Admin id:</b> {filmUpdateFist.idAdmin}</div>
             </div>);
     }
  
@@ -112,6 +140,10 @@ export default function AdminFilm(){
                     <div className="admin_part">
                         <b>Price:</b> {film.prezzo} €
                         <br/>
+                        Number of films sold: <b>{numSales}</b>
+                        <br/>
+                        Proceeds from sales: <b>{earnings != null ? earnings : 0} €</b>
+                        <br />
                         Last update done by <b>{window.sessionStorage.getItem("email")}</b>
                         <div className="buttons_section">
                             <div className="edit">

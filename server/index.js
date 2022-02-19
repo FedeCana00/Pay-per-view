@@ -423,6 +423,46 @@ app.get("/update/:id", (req, res) => {
   db.end();
 });
 
+// get number of film buy
+app.get("/sales/:id", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  const id = req.params.id;
+
+  // order by data desc
+  db.query("SELECT COUNT(*) as sales FROM acquisto WHERE idFilm = ?", [id],
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
+  db.end();
+});
+
+// get earning of film
+app.get("/earnings/:id", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  const id = req.params.id;
+
+  // order by data desc
+  db.query("SELECT SUM(prezzo) as earn FROM acquisto WHERE idFilm = ?", [id],
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
+  db.end();
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
