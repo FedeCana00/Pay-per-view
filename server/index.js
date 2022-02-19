@@ -127,6 +127,24 @@ app.get("/userinventory", (req, res) => {
     db.end();
 });
 
+app.get("/films/bestsellers", (req, res) => {
+  const db = mysql.createConnection(config);
+    
+    db.query("SELECT f.*, COUNT(*) AS freq" +
+    " FROM acquisto as a, film as f WHERE a.idFilm = f.id " + 
+    "GROUP BY idFilm ORDER BY freq desc",
+    (err, result) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    });
+
+    // close connection
+    db.end();
+});
+
 // get films from genere
 app.get("/films/genere", (req, res) => {
     const db = mysql.createConnection(config);

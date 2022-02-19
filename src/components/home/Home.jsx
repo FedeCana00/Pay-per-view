@@ -7,6 +7,7 @@ export default function Home() {
     return (
         <div className="home" id="home">
             <Films_bar show={specialsGenere[0].name}/>
+            <Films_bar show={specialsGenere[1].name}/>
             <Films_bar show={generes[0].name}/>
             <Films_bar show={generes[1].name}/>
             <Films_bar show={generes[2].name}/>

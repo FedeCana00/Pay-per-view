@@ -32,6 +32,8 @@ export default function Films_bar({show}) {
            case specialsGenere[0].name:
                getNewReleases();
                break;
+            case specialsGenere[1].name:
+                getBestSellers();
        }
     }, []);
 
@@ -50,7 +52,20 @@ export default function Films_bar({show}) {
             }
         });
     }
-
+    function getBestSellers(){
+        axios.get("http://localhost:3001/films/bestsellers", {
+            params: { }
+        }).then((response) => {
+            if(response.data === null)
+                console.log("Error! Film not found!");
+            else{
+                if(response.data.length > 0)
+                    setFilms(response.data);
+                else 
+                    setFilms([]);
+            }
+        });
+    }
     // get films by genere
     function getGenere(genere){
         axios.get("http://localhost:3001/films/genere", {
