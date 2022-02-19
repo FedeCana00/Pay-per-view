@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Loading from "../loading/Loading";
 import "./personal.scss"
 import React from 'react'
 import {useState, useEffect} from 'react'
@@ -70,7 +70,7 @@ export const Personal = () => {
             console.log('no movie owned')
         }
           setMovieList(response2.data)
-          setLoading(false)   
+          setLoading(false)
         
         }catch(error){
           
@@ -111,13 +111,5 @@ export const Personal = () => {
 
 const ErrorComponent= ()=> {
     return(<div><h2>Error...</h2></div>);
-}
-
-const Loading = ()=> {
-    return(
-      <div>
-        <h2>Loading...</h2>
-      </div>
-    )
 }
  

@@ -1,0 +1,49 @@
+@import "../../global.scss";
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+      
+    .ball {
+        display: flex;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 10px;
+        align-items: center;
+        justify-content: center;
+        animation: 2s bounce ease infinite;
+
+        &.blue {
+            background-color: #4285F5;
+        }
+        
+        &.red {
+            background-color: #EA4436;
+            animation-delay: .25s;
+        }
+        
+        &.yellow {
+            background-color: #FBBD06;
+            animation-delay: .5s;
+        }
+        
+        &.green {
+            background-color: #34A952;
+            animation-delay: .75s;
+        }
+
+        img{
+            width: 60px;
+        }
+        
+        @keyframes bounce {  
+            50% {
+                transform: translateY(25px);
+            }
+        }
+    
+    }
+}
