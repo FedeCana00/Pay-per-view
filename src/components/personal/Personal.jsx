@@ -19,6 +19,27 @@ export const Personal = () => {
           + date.toString().substring(4, 6) + "-"
           + date.toString().substring(6, 8);
   }
+
+  const MovieList =()=>{
+    if (movieList.length!==0){
+      return <div>
+      <h2>Movie List</h2>
+      {movieList.map((d,key) => (
+              <div key={key}>
+            <Link to={"/film/"+ d.id}>
+              <button>
+              {d.nome}
+              </button>
+          </Link>
+ 
+              </div>
+          ))}
+  </div>
+    }
+    else{
+      return <></>
+    }
+  }
     useEffect(()=>{
         getData();
         },[]);
@@ -37,18 +58,20 @@ export const Personal = () => {
           }
       });
         if (response.data.length===0){
+            setError(true);
             throw 'Empty response on get user info';
         }
           setData(response.data[0])
 
           if (response2.data.length===0){
-            throw 'Empty response on get movie list';
+
+            console.log('no movie owned')
         }
           setMovieList(response2.data)
           setLoading(false)   
         
         }catch(error){
-          setError(true);
+          
           console.log(error);
         }
       }
@@ -77,23 +100,13 @@ export const Personal = () => {
             <h2>Data di Nascita</h2>
             {getDate(data.datanascita)}
         </div>
-        <div>
-            <h2>Movie List</h2>
-            {movieList.map((d,key) => (
-                    <div key={key}>
-                  <Link to={"/film/"+ d.id}>
-                    <button>
-                    {d.nome}
-                    </button>
-                </Link>
-
-                    </div>
-                ))}
-        </div>
         
+        <MovieList/>
 
     </div>
   )
+
+  
 }
 const ErrorComponent= ()=> {
     return(<div><h2>Error...</h2></div>);
@@ -107,4 +120,7 @@ const Loading = ()=> {
       </div>
     )
   
+
+    
   }
+ 
