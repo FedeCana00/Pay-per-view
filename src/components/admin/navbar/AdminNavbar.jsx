@@ -10,14 +10,14 @@ export default function Navbar() {
     const [textSearch, setTextSearch] = useState("");
     const location=useLocation()
     // used to change programmatically page
-    const navigate = useNavigate();
+    var navigate = useNavigate();
     useEffect(()=>{
         console.log(location.pathname.includes('/admin/')&& window.sessionStorage.getItem('isAdmin')!==1)
         if (location.pathname.includes('/admin/')){
             navigate('/')
             
         }
-    },location)
+    },[location.pathname])
     // used to perform query of search by name
     function textChanged(text){
         setTextSearch(text);
