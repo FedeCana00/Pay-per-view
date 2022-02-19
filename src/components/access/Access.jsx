@@ -59,20 +59,18 @@ export default function Access() {
                 saveIdInSessionStorage(id);
                 saveIsAdminIdInSessionStorage(isAdmin)
                 savePasswordInSessionStorage()
-                 // go to home page
-                 if(window.sessionStorage.getItem('linkto')){
-                    
+                // choose route if Admin or not 
+                if(response.data[0].isAdmin){
+                    window.sessionStorage.removeItem('linkto');
+                    navigate('/admin');
+                }
+                else if(window.sessionStorage.getItem('linkto')){
                     navigate('/film/'+window.sessionStorage.getItem('linkto'));
                     window.sessionStorage.removeItem('linkto');
-                 }
-                 else{
-                    // choose route if Admin or not 
-                    if(response.data[0].isAdmin)
-                        navigate('/admin');
-                    else
-                        navigate('/');
-                 }
-                
+                }
+                // go to home page
+                else navigate('/');
+
                 // refresh page in order reload navabar component 
                 // else not change element on the right
                 window.location.reload();
