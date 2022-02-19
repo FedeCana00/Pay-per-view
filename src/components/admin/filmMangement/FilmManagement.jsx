@@ -49,7 +49,7 @@ export default function FilmManagement() {
                     setName(response.data[0].nome);
                     setGenere(response.data[0].genere);
                     setPlot(response.data[0].trama);
-                    setDate(response.data[0].data);
+                    setDate(getDate(response.data[0].datauscita));
                     setPrice(response.data[0].prezzo);
                     setDuration(response.data[0].durata);
                     setImage(response.data[0].locandina);
@@ -172,6 +172,13 @@ export default function FilmManagement() {
 
         // load video
         document.getElementById('video-upload').load();
+    }
+
+    // convert int date into date format input field
+    function getDate(date){
+        return date.toString().substring(0, 4) + "-"
+            + date.toString().substring(4, 6) + "-"
+            + date.toString().substring(6, 8);
     }
 
     return (
