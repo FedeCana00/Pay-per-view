@@ -57,7 +57,7 @@ export default function Film(){
                     idUser:window.sessionStorage.getItem('id')
                 }
             }).then((response)=>{
-                if(response.data === null)
+                if(response.data.length == 0)
                     setBought(0)
                 else setBought(1)
             })
@@ -83,6 +83,7 @@ export default function Film(){
             );
         }
         else{
+            console.log(bought)
             return<a href={"http://localhost:3001/getfile?id="+film.id}>Download the Movie</a>
 
         }
