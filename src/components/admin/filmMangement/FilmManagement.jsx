@@ -243,7 +243,7 @@ export default function FilmManagement() {
                         </div>
                         <div className="right">
                             <video controls id="video-upload">
-                                <source src={file} type="video/mp4"/>
+                                <source src={'http://localhost:3001/'+file.replace(/^.*[\\\/]/, '')} type="video/mp4"/>
                                 Your browser does not support the video tag.
                             </video>
                         </div>

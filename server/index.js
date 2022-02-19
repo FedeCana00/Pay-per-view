@@ -3,10 +3,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const mysql = require('mysql')
 const cors = require('cors')
+var path= require('path')
 
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, 'movies')))
 // database configuration
 const config = {
   user: "fdsa959shf",
@@ -249,7 +250,7 @@ app.get("/alreadyowned", (req, res) => {
     // close connection
     db.end();
 });
-
+//user downloads the file
 app.get("/getfile",(req,res)=>{
   const db = mysql.createConnection(config);
   console.log(req.query.id)
