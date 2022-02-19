@@ -10,7 +10,7 @@ export default function Navbar() {
     const [textSearch, setTextSearch] = useState("");
     const location=useLocation()
     // used to change programmatically page
-    var navigate = useNavigate();
+    const navigate = useNavigate();
     useEffect(()=>{
         console.log(location.pathname.includes('/admin/')&& window.sessionStorage.getItem('isAdmin')!==1)
         if (location.pathname.includes('/admin/')){
