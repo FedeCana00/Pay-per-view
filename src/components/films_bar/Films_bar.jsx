@@ -69,6 +69,22 @@ export default function Films_bar({show}) {
         });
     }
 
+    // used to show price with discount or full price
+    function showPrice(d){
+        if(d.sconto != 0)
+            return (
+                <div className="price">
+                    <s>{d.prezzo} €</s> {Math.round(d.prezzo * (100 - d.sconto)) / 100} €
+                </div>
+            );
+        else
+            return (
+                <div className="price">
+                    {Math.round(d.prezzo * (100 - d.sconto)) / 100} €
+                </div>
+            );
+    }
+
     return (
         <div className="films_bar" id={show}>
             <div className="title-container">
@@ -83,7 +99,7 @@ export default function Films_bar({show}) {
                             <div className="info">
                                 <div className="name">{d.nome}</div>
                                 <div className="genere">{d.genere}</div>
-                                <div className="price">{d.prezzo} €</div>
+                                {showPrice(d)}
                             </div>
                         </div>
                     </Link>

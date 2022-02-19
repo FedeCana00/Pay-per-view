@@ -71,20 +71,32 @@ export default function Film(){
         if(window.sessionStorage.getItem('email') === null && window.sessionStorage.getItem('password') === null){
             window.sessionStorage.setItem('Error','Please, sign in before buying');
             return<Link to="/access">
-                <button onClick={()=>setSessionstorage()}>Buy in 4k {film.prezzo} €</button>
+                <button onClick={()=>setSessionstorage()}>Buy in 4k {Math.round(film.prezzo * (100 - film.sconto)) / 100} €</button>
                 </Link>
-            
         }
         else if (bought===0){
             
-            return<Link to="/payment">
-                <button onClick={()=>setSessionstorage()}>Buy in 4k {film.prezzo} €</button>
+            return (
+                <Link to="/payment">
+                    <button onClick={()=>setSessionstorage()}>Buy in 4k {Math.round(film.prezzo * (100 - film.sconto)) / 100} €</button>
                 </Link>
+            );
         }
         else{
             return<a href={"http://localhost:3001/getfile?id="+film.id}>Download the Movie</a>
 
         }
+    }
+
+    // used to show discount badge if is different from 0
+    function showDiscount(){
+        if(film.sconto != 0)
+            return (
+                <div className="discount">
+                    <div className="title"><b>Discount:</b></div>
+                    <div className="text">- {film.sconto} %</div>
+                </div>
+            );
     }
  
     return (
@@ -102,6 +114,7 @@ export default function Film(){
                         <b>Plot:</b> {film.trama}
                     </div>
                     <br /><br/>
+                    {showDiscount()}
                     {checkLogin()}
                     
                 </div>

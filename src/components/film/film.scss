@@ -53,6 +53,28 @@
                 font-size: small;
             }
 
+            .discount{
+                flex-direction: row;
+                display: flex;
+                align-items: center;
+
+                .title{
+                    font-size: medium;
+                }
+                
+                .text{
+                    width: 50px;
+                    font-size: medium;
+                    color: white;
+                    font-weight: bold;
+                    background-color: $red;
+                    border-radius: 50%;
+                    padding: 20px;
+                    margin: 10px;
+                    text-align: center;
+                }
+            }
+
             .admin_part{
                 align-items: center;
                 justify-content: center;

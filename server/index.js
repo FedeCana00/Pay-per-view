@@ -423,6 +423,27 @@ app.get("/update/:id", (req, res) => {
   db.end();
 });
 
+// post update discount 0f film
+app.post("/update/:id/:discount", (req, res) => {
+  const db = mysql.createConnection(config);
+
+  const id = req.params.id;
+  const discount = req.params.discount;
+
+  // order by data desc
+  db.query("UPDATE film SET sconto = ? WHERE id = ?", [discount, id],
+  (err, result) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+
+  // close connection
+  db.end();
+});
+
 // get number of film buy
 app.get("/sales/:id", (req, res) => {
   const db = mysql.createConnection(config);

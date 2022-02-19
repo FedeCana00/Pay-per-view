@@ -128,13 +128,20 @@ export default function AdminFilm(){
         if(value == film.sconto)
             return <button key={key} style={{color: "#ed3b3b", borderColor: "#ed3b3b"}}>{value}</button>
         else
-            return <button key={key}>{value}</button>
+            return <button key={key} onClick={() => updateDiscount(value)}>{value}</button>
     }
 
 
     // update discount in database
     function updateDiscount(value){
-
+        // get first update of this film
+        axios.post("http://localhost:3001/update/" + id + "/" + value).then((response) => {
+            if(response.data === null)
+                console.log("Error! Discount update rejected!");
+            else
+                // reload page in order to refresh discount
+                window.location.reload();
+        });
     }
  
     return (
@@ -158,6 +165,8 @@ export default function AdminFilm(){
                             {discount.map((d, key) => showDiscount(d.value, key))}
                         </div>
                         <b>Price:</b> {film.prezzo} €
+                        <br/>
+                        <b>Price with discount:</b> {Math.round(film.prezzo * (100 - film.sconto)) / 100} €
                         <br/>
                         Number of films sold: <b>{numSales}</b>
                         <br/>

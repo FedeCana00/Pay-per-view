@@ -25,7 +25,7 @@ const Payment = () => {
             }
         }).then((response)=>{
           if (response.data.length > 0)
-            setPrezzo(response.data[0].prezzo) 
+            setPrezzo(Math.round(response.data[0].prezzo * (100 - response.data[0].sconto)) / 100) 
         });
   }
 
