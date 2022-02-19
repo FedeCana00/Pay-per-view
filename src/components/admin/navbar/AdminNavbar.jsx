@@ -1,16 +1,23 @@
 import { Link, Outlet } from "react-router-dom";
 import Connected from "../../navbar/connected/Connected";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { type } from "../../../constants/typeSearch";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import { typeOfManagement } from "../filmManagement";
 
 export default function Navbar() {
     const [showSearchBar, setShowSearchBar] = useState(false);
     const [textSearch, setTextSearch] = useState("");
+    const location=useLocation()
     // used to change programmatically page
     const navigate = useNavigate();
-
+    useEffect(()=>{
+        console.log(location.pathname.includes('/admin/')&& window.sessionStorage.getItem('isAdmin')!==1)
+        if (location.pathname.includes('/admin/')){
+            navigate('/')
+            
+        }
+    },location)
     // used to perform query of search by name
     function textChanged(text){
         setTextSearch(text);
