@@ -13,7 +13,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminFilm from "./components/admin/film/AdminFilm";
 import Sales from "./components/admin/sales/Sales";
 import FilmManagement from "./components/admin/filmMangement/FilmManagement";
-
+import Footer from "./components/footer/Footer";
 
 function App() {
 
@@ -39,6 +39,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    
   );
 }
 

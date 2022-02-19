@@ -1,0 +1,21 @@
+@import "../../global.scss";
+
+.footer{
+    background-color: $red;
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+
+    img{
+        width: 50px;
+        margin: 10px;
+    }
+
+    .name{
+        font-size: small;
+        font-weight: bold;
+        color: white;
+        margin: 10px;
+    }
+}
