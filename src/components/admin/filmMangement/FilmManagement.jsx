@@ -68,6 +68,10 @@ export default function FilmManagement() {
         if(!checkFields())
             return;
 
+        // check if anything has been changed
+        if(!checkEdit())
+            return;
+
         // in order of type of operation choose action
         switch(type){
             case typeOfManagement[0].name:
@@ -152,6 +156,26 @@ export default function FilmManagement() {
             msg += "File url is wrong!\n";
         if(image.length <= 0)
             msg += "Image url is wrong!\n";
+
+        setErrorMsg(msg);
+
+        // reset error message after 5 seconds
+        setTimeout(() => setErrorMsg(""), 5000);
+
+        return msg.length == 0;
+    }
+
+    // check if anything has been changed
+    function checkEdit(){
+        setErrorMsg("");
+        let msg = "";
+        let text = "Nothing has been changed since before!";
+
+        if(name == oldFilm.nome && genere == oldFilm.genere
+            && plot == oldFilm.trama && convertDateIntoInt(date) == oldFilm.datauscita
+            && price == oldFilm.prezzo && duration == oldFilm.durata
+            && image == oldFilm.locandina && file == oldFilm.file)
+            msg = text;
 
         setErrorMsg(msg);
 
