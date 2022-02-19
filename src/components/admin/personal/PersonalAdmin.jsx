@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import "./personaladmin.scss"
+import "../../personal/personal.scss";
 import React from 'react'
 import {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
@@ -53,33 +53,31 @@ export const PersonalAdmin = () => {
       }
   return (
     <div className='personal'>
-        <h1>Il tuo spazio personale</h1>
+        <h1>Your personal space</h1>
         <div className="info">
-            <h2>Nome</h2>
+            <h2>Name</h2>
             {data.nome}
         </div>
-        <div>
-            <h2>Cognome</h2>
+        <div className="info">
+            <h2>Surname</h2>
             {data.cognome}
         </div>
-        <div>
+        <div className="info">
             <h2>Email</h2>
             {data.email}
         </div>
-        <div>
-            <h2>Data di Nascita</h2>
+        <div className="info">
+            <h2>Date of birth</h2>
             {getDate(data.datanascita)}
         </div>
-
     </div>
   )
-
-  
 }
+
 const ErrorComponent= ()=> {
     return(<div><h2>Error...</h2></div>);
     
-  }
+}
 
 const Loading = ()=> {
     return(
@@ -87,8 +85,5 @@ const Loading = ()=> {
       <h2>Loading...</h2>
       </div>
     )
-  
-
-    
-  }
+}
  
