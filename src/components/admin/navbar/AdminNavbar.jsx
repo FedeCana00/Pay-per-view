@@ -35,7 +35,7 @@ export default function Navbar() {
             <div className="wrapper">
                 <div className="left">
                     <div className="admin">Admin</div>
-                    <a href="" className="logo">
+                    <a href="/admin" className="logo">
                         Pay per view
                     </a>
                     <img src="/assets/icon.png" alt="icon" />
