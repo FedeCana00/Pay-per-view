@@ -1,4 +1,40 @@
-# Getting Started with Create React App
+
+![alt reactJs](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![alt expressJs](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![alt nodejS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![alt saas](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![alt html5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![GitHub contributors](https://img.shields.io/github/contributors/FedeCana00/Pay-per-view?style=for-the-badge)
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/FedeCana00/Pay-per-view">
+    <img src="public/assets/icon.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Pay per view</h3>
+
+  <p align="center">
+    E-commerce selling films similar to Google Play films.
+    <br />
+    <a href="#installation">Installation</a>
+    ·
+    <a href="#about-the-project">About</a>
+  </p>
+</div>
+
+## About the project
+
+<img src="screenshot/home.png" alt="Logo">
+
+There are two types of users: <b>customer</b>, <b>administrator</b>. <br />
+Customers can register and log into e-commerce. Each customer can buy a film and then download it. You can browse the catalog by genre, release date, pricing opportunities (discounts), bestsellers. Can search by name. It has a private area where it can view the history of purchases. <br />
+Each administrator can add, delete or modify the inventory and check by whom the last modification was made. Additionally, you can view customer purchases.
+
+
+
+## Installation
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
