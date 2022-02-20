@@ -14,8 +14,10 @@ const Payment = () => {
   const [cvc, setCvc]=useState('')
   const [prezzo, setPrezzo]= useState('')
   const [errorMsg, setErrorMsg] = useState("");
-    // used to show success message
+  // used to show success message
   const [successMsg, setSuccessMsg] = useState("");
+  // used to control the button click after submit
+  const [controlSubmit, setControlSubmit] = useState(false);
 
   // get movies to buy from database
   const getMovieInfo= ()=>{
@@ -38,23 +40,30 @@ const Payment = () => {
   async function submit(e){
     e.preventDefault();
 
+    if(controlSubmit)
+      return;
+
+    setControlSubmit(true);
+
     // used to check the correct fillment
     let c = await checkFields();
-    if(!c)
+    if(!c){
+      setControlSubmit(false);
       return;
+    }
+    
     axios.post('http://localhost:3001/payment', {
       idFilm:window.sessionStorage.getItem('linkto'),
       idUser:window.sessionStorage.getItem('id'),
       prezzo:prezzo
         }).then((response)=>{
           if(response.status===201){
-            setSuccessMsg("Registration was successful!");
+            setSuccessMsg("Buy was successful!");
             setTimeout(() => setSuccessMsg(""), 5000);
             navigate("/")
           }
+          setControlSubmit(false);
         });
-    
-
   }
 
   // check fields before insert into database
@@ -64,7 +73,7 @@ const Payment = () => {
     let msg = "";
     
     if(cardnumber.length <= 0)
-        msg += "cardnumber is empty! \n";
+        msg += "Card number is empty! \n";
     if(titolare.length <= 0)
         msg += "Holder is empty!\n";
     if(cvc.length <= 0)

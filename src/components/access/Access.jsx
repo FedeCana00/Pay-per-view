@@ -53,7 +53,6 @@ export default function Access() {
                 // reset success message after 5 seconds
                 setTimeout(() => setSuccessMsg(""), 5000);
 
-                //TODO io creerei una classe con tutti i dati tranne la password (o con?), più la lista dei film
                 saveEmailInSessionStorage();
                 saveIdInSessionStorage(id);
                 saveIsAdminIdInSessionStorage(isAdmin)
@@ -82,10 +81,11 @@ export default function Access() {
         });
     };
 
-    const signUp = (e) => {
+    const signUp = async (e) => {
         e.preventDefault()
         // check if fields are filled right
-        if(!checkFields())
+        var c = await checkFields();
+        if(!c)
             return;
 
         // post request
@@ -111,7 +111,7 @@ export default function Access() {
     }
 
     // check fields before insert into database
-    function checkFields(){
+    async function checkFields(){
         setErrorMsg("");
         let msg = "";
         
@@ -121,19 +121,19 @@ export default function Access() {
             msg += "Surname is empty!\n";
         if(email.length <= 0)
             msg += "Email is empty!\n";
-        else{ // TODO: wait the response before show message
+        else{
             // get request
-            axios.get("http://localhost:3001/isUsernameInUse", {
+            let response = await axios.get("http://localhost:3001/isUsernameInUse", {
                 params: {
                     email: email
                 }
-            }).then((response) => {
-                if(response.data !== undefined){
-                    msg += "Email already in use!\n";
-                }
             });
+            // check if the mail is already owned
+            if(response.data.length != 0){
+                msg += "Email already in use!\n";
+            }
         }
-
+    
         if(password.length <= 0)
             msg += "Password is empty!\n";
         if(isNaN(Date.parse(birthDate)))
@@ -143,7 +143,7 @@ export default function Access() {
 
         // reset error message after 5 seconds
         setTimeout(() => setErrorMsg(""), 5000);
-
+        
         return msg.length == 0;
     }
 
