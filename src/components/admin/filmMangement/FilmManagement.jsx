@@ -248,7 +248,7 @@ export default function FilmManagement() {
                             </video>
                         </div>
                     </div>
-                    <button type='submit'>{idFilm == null ? "Add" : "Edit"}</button>
+                    <button type='submit'>{idFilm == "film" ? "Add" : "Edit"}</button>
                 </div>
             </form>
 

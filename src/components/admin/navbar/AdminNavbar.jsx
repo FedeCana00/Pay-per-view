@@ -74,7 +74,7 @@ export default function Navbar() {
             </div>
 
             <Outlet />
-            <Footer/>
+            <Footer />
         </div>
     );
 }

@@ -116,7 +116,7 @@ const Payment = () => {
           
             <label>Valid thru:</label>
             <input type="month" onChange={(event) => {setDataScadenza(event.target.value)}}/>
-            <button type='submit'>Conferma</button>
+            <button type='submit'>Confirm</button>
           </form>
         </div>
       </div>

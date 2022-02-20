@@ -34,22 +34,25 @@
             color: black;
             margin: 20px;
 
-            a{
-                text-decoration: none;
-                width: 40px;
-                background-color:cornflowerblue;
-                color: white;
-                padding: 10px;
-                text-align: center;
-                font-size: small;
-                font-weight: bold;
-                border-radius: 12px;
-                box-shadow: 5px 5px 5px grey;
-                cursor: pointer;
-                margin: 5px;
-        
-                &:hover {
-                    opacity: 0.7;
+
+            .download{
+                a{
+                    text-decoration: none;
+                    width: 40px;
+                    background-color:cornflowerblue;
+                    color: white;
+                    padding: 10px;
+                    text-align: center;
+                    font-size: small;
+                    font-weight: bold;
+                    border-radius: 12px;
+                    box-shadow: 5px 5px 5px grey;
+                    cursor: pointer;
+                    margin: 5px;
+            
+                    &:hover {
+                        opacity: 0.7;
+                    }
                 }
             }
 

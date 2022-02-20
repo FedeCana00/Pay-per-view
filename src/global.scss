@@ -4,18 +4,3 @@
 $backgroundColor: #eeeeee;
 $red: #ed3b3b;
 $blue:#0E86D4;
-
-$widthMobile: 768px;
-$widthDesktop: 769px;
-
-@mixin mobile {
-    @media (max-width: #{$widthMobile}){
-        @content
-    }
-}
-
-@mixin web {
-    @media (min-width: #{$widthDesktop}){
-        @content
-    }
-}

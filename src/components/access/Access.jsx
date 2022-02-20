@@ -1,5 +1,4 @@
 import "./access.scss"
-import User from "../../class/User.jsx"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { sha512 } from "js-sha512";

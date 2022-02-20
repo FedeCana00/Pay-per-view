@@ -3,12 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 export default function Film(){
-    const navigate= useNavigate()
- 
-    
     const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
@@ -83,9 +79,9 @@ export default function Film(){
             );
         }
         else{
-            console.log(bought)
-            return<a href={"http://localhost:3001/getfile?id="+film.id}>Download the Movie</a>
-
+            return <div className="download">
+                    <a href={"http://localhost:3001/getfile?id="+film.id}>Download the Movie</a>
+                </div>
         }
     }
 
