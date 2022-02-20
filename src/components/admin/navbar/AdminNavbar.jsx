@@ -13,7 +13,6 @@ export default function Navbar() {
     // used to change programmatically page
     const navigate = useNavigate();
     useEffect(()=>{
-        console.log(location.pathname.includes('/admin/'))
         if (location.pathname.includes('/admin/')&& window.sessionStorage.getItem('isAdmin')!=1){
             navigate('/')
             

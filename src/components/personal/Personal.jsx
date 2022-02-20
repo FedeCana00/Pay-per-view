@@ -27,8 +27,8 @@ export const Personal = () => {
         <h2>My movies</h2>
         <div className="movie-list">
           {movieList.map((d,key) => (
-            <Link to={"/film/"+ d.id}>
-              <div className="movie" key={key}>
+            <Link to={"/film/"+ d.id} key={key}>
+              <div className="movie">
                 <img src={d.locandina} alt="" />
               </div>
             </Link>

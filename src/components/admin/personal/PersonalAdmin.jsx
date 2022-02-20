@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../personal/personal.scss";
 import React from 'react'
 import {useState, useEffect} from 'react'
-import { Link } from "react-router-dom";
+import Loading from "../../loading/Loading";
 
 export const PersonalAdmin = () => {
     const [error,setError]= useState(false)
@@ -77,13 +77,5 @@ export const PersonalAdmin = () => {
 const ErrorComponent= ()=> {
     return(<div><h2>Error...</h2></div>);
     
-}
-
-const Loading = ()=> {
-    return(
-      <div>
-      <h2>Loading...</h2>
-      </div>
-    )
 }
  
