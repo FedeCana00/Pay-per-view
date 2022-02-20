@@ -246,7 +246,6 @@ app.post('/payment',(req,res)=>{
 
 app.get("/alreadyowned", (req, res) => {
   const db = mysql.createConnection(config);
-  console.log(req.query.idFilm, req.query.idUser);
   
   db.query("SELECT * FROM acquisto WHERE idFilm = ? AND idUser= ?", [req.query.idFilm, req.query.idUser],
     (err, result) => {
@@ -263,7 +262,7 @@ app.get("/alreadyowned", (req, res) => {
 //user downloads the file
 app.get("/getfile",(req,res)=>{
   const db = mysql.createConnection(config);
-  console.log(req.query.id)
+  
   db.query("SELECT file FROM film WHERE id = ?", [req.query.id],
     (err, result) => {
       if(err){
