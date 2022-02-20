@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import Loading from "../loading/Loading";
 
 export default function Film(){
+    const [loading, setLoading] = useState(true);
     const [film, setFilm] = useState([]);
     // used to get the id passed from the url
     const { id } = useParams()
@@ -44,6 +46,9 @@ export default function Film(){
                         prezzo: 0
                 
                     });
+                
+                // interput loading phase
+                setLoading(false);
             }
         });
         if (window.sessionStorage.getItem('id')!==null){
@@ -95,27 +100,37 @@ export default function Film(){
                 </div>
             );
     }
- 
-    return (
-        <div className="film">
-            <div className="top">
-                <div className="left">
-                    <img src={film.locandina} alt=""/>
-                </div>
-                <div className="right">
-                    <div className="title">{film.nome}</div>
-                    <div className="data">{getDate(film.datauscita)} {film.durata} minutes</div>
-                    <div className="genere">{film.genere}</div>
-                    <br/><br/>
-                    <div className="plot">
-                        <b>Plot:</b> {film.trama}
+
+    // used to show component or loading page
+    function showComponent(){
+        if(loading)
+            return <Loading />
+        else
+        return (
+            <div className="film">
+                <div className="top">
+                    <div className="left">
+                        <img src={film.locandina} alt=""/>
                     </div>
-                    <br /><br/>
-                    {showDiscount()}
-                    {checkLogin()}
-                    
+                    <div className="right">
+                        <div className="title">{film.nome}</div>
+                        <div className="data">{getDate(film.datauscita)} {film.durata} minutes</div>
+                        <div className="genere">{film.genere}</div>
+                        <br/><br/>
+                        <div className="plot">
+                            <b>Plot:</b> {film.trama}
+                        </div>
+                        <br /><br/>
+                        {showDiscount()}
+                        {checkLogin()}
+                        
+                    </div>
                 </div>
             </div>
-        </div>
+        );
+    }
+ 
+    return (
+        <div>{showComponent()}</div>
     );
 }

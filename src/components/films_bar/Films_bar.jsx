@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { generes, specialsGenere } from "../navbar/genere";
 import axios from "axios";
 import { type } from "../../constants/typeSearch";
+import Loading from "../loading/Loading";
 
 export default function Films_bar({show}) {
-
+    const [loading, setLoading] = useState(true);
     const [films, setFilms] = useState([]);
     // used to link to Film_Result
     const [typeSearch, setTypeSearch] = useState("");
@@ -106,6 +107,9 @@ export default function Films_bar({show}) {
             setFilms(mFilms);
         } else 
             setFilms([]);
+
+        // interupt loading in each two case
+        setLoading(false);
     }
 
     // used to show price with discount or full price
@@ -124,28 +128,38 @@ export default function Films_bar({show}) {
             );
     }
 
+    // used to show component or loading page
+    function showComponent(){
+        if(loading)
+            return <Loading />
+        else
+            return (
+                <div className="films_bar" id={show}>
+                    <div className="title-container">
+                        <div className="title-name">{show}</div>
+                        <Link to={"/films/" + typeSearch + "/" + param}>
+                            <button id="show more">Show more</button>
+                        </Link>
+                    </div>
+                    <div className="container">
+                        {films.map((d, key) => (
+                            <Link to={"/film/" + d.id} key={key}>
+                                <div className="card">
+                                    <img src={d.locandina} />
+                                    <div className="info">
+                                        <div className="name">{d.nome}</div>
+                                        <div className="genere">{d.genere}</div>
+                                        {showPrice(d)}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+                );
+    }
+
     return (
-        <div className="films_bar" id={show}>
-            <div className="title-container">
-                <div className="title-name">{show}</div>
-                <Link to={"/films/" + typeSearch + "/" + param}>
-                    <button id="show more">Show more</button>
-                </Link>
-            </div>
-            <div className="container">
-                {films.map((d, key) => (
-                    <Link to={"/film/" + d.id} key={key}>
-                        <div className="card">
-                            <img src={d.locandina} />
-                            <div className="info">
-                                <div className="name">{d.nome}</div>
-                                <div className="genere">{d.genere}</div>
-                                {showPrice(d)}
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
-        </div>
+        <div>{showComponent()}</div>
         );
 }

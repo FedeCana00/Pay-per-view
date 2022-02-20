@@ -2,13 +2,14 @@ import "../../film/film.scss"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
-import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { typeOfManagement } from "../filmManagement";
 import { discount } from "./discount";
+import Loading from "../../loading/Loading";
 
 export default function AdminFilm(){
-    const navigate= useNavigate()
+    const navigate= useNavigate();
+    const [loading, setLoading] = useState(true);
     const [film, setFilm] = useState([]);
     const [filmUpdateFist, setFilmUpdateFirst] = useState([]);
     const [numSales, setNumSales] = useState(0);
@@ -42,6 +43,8 @@ export default function AdminFilm(){
                         prezzo: 0
                 
                     });
+
+                setLoading(false);
             }
         });
 
@@ -143,53 +146,63 @@ export default function AdminFilm(){
                 window.location.reload();
         });
     }
+
+    // used to show component or loading page
+    function showComponent(){
+        if(loading)
+            return <Loading />
+        else
+        return (
+            <div className="film">
+                <div className="top">
+                    <div className="left">
+                        <img src={film.locandina} alt=""/>
+                    </div>
+                    <div className="right">
+                        <div className="title">{film.nome}</div>
+                        <div className="data">{getDate(film.datauscita)} {film.durata} minutes</div>
+                        <div className="genere">{film.genere}</div>
+                        <br/><br/>
+                        <div className="plot">
+                            <b>Plot:</b> {film.trama}
+                        </div>
+                        <br /><br/>
+                        <div className="admin_part">
+                            <div className="discount_section">
+                                <b>Discount%:</b>
+                                {discount.map((d, key) => showDiscount(d.value, key))}
+                            </div>
+                            <b>Price:</b> {film.prezzo} €
+                            <br/>
+                            <b>Price with discount:</b> {Math.round(film.prezzo * (100 - film.sconto)) / 100} €
+                            <br/>
+                            Number of films sold: <b>{numSales}</b>
+                            <br/>
+                            Proceeds from sales: <b>{earnings != null ? earnings : 0} €</b>
+                            <br />
+                            Last update done by <b>{window.sessionStorage.getItem("email")}</b>
+                            <div className="buttons_section">
+                                <div className="edit">
+                                    <button onClick={() => navigate("/admin/" + typeOfManagement[1].name + "/" + film.id)}>Edit</button>
+                                </div>
+                                <div className="delete">
+                                    <button onClick={() => deleteFilm()}>Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="updateFirst">
+                    <div className="title">
+                        Update first
+                    </div>
+                    {updateFirst()}
+                </div>
+            </div>
+        );
+    }
  
     return (
-        <div className="film">
-            <div className="top">
-                <div className="left">
-                    <img src={film.locandina} alt=""/>
-                </div>
-                <div className="right">
-                    <div className="title">{film.nome}</div>
-                    <div className="data">{getDate(film.datauscita)} {film.durata} minutes</div>
-                    <div className="genere">{film.genere}</div>
-                    <br/><br/>
-                    <div className="plot">
-                        <b>Plot:</b> {film.trama}
-                    </div>
-                    <br /><br/>
-                    <div className="admin_part">
-                        <div className="discount_section">
-                            <b>Discount%:</b>
-                            {discount.map((d, key) => showDiscount(d.value, key))}
-                        </div>
-                        <b>Price:</b> {film.prezzo} €
-                        <br/>
-                        <b>Price with discount:</b> {Math.round(film.prezzo * (100 - film.sconto)) / 100} €
-                        <br/>
-                        Number of films sold: <b>{numSales}</b>
-                        <br/>
-                        Proceeds from sales: <b>{earnings != null ? earnings : 0} €</b>
-                        <br />
-                        Last update done by <b>{window.sessionStorage.getItem("email")}</b>
-                        <div className="buttons_section">
-                            <div className="edit">
-                                <button onClick={() => navigate("/admin/" + typeOfManagement[1].name + "/" + film.id)}>Edit</button>
-                            </div>
-                            <div className="delete">
-                                <button onClick={() => deleteFilm()}>Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="updateFirst">
-                <div className="title">
-                    Update first
-                </div>
-                {updateFirst()}
-            </div>
-        </div>
+        <div>{showComponent()}</div>
     );
 }

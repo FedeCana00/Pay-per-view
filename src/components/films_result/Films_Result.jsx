@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { type } from "../../constants/typeSearch";
+import Loading from "../loading/Loading";
 
 export default function Films_Result() {
-
+    const [loading, setLoading] = useState(true);
     const [films, setFilms] = useState([]);
     const [notFound, setNotFound] = useState(false);
     // used to get the params passed from the url
@@ -42,18 +43,7 @@ export default function Films_Result() {
                 genere: param
             }
         }).then((response) => {
-            if(response.data === null){
-                console.log("Error! Film not found!");
-                setNotFound(true);
-            } else{
-                if(response.data.length > 0){
-                    setFilms(response.data);
-                    setNotFound(false);
-                } else {
-                    setFilms([]);
-                    setNotFound(true);
-                }
-            }
+            getResponseAndSetFilms(response);
         });
     }
 
@@ -64,18 +54,7 @@ export default function Films_Result() {
                 name: param
             }
         }).then((response) => {
-            if(response.data === null){
-                setNotFound(true);
-                console.log("Error! Film not found!"); 
-            } else{
-                if(response.data.length > 0){
-                    setFilms(response.data);
-                    setNotFound(false);
-                } else {
-                    setFilms([]);
-                    setNotFound(true);
-                }
-            }
+            getResponseAndSetFilms(response);
         });
     }
 
@@ -83,18 +62,7 @@ export default function Films_Result() {
     function searchAll(){
         axios.get("http://localhost:3001/films/searchAll", {}
         ).then((response) => {
-            if(response.data === null){
-                setNotFound(true);
-                console.log("Error! Film not found!"); 
-            } else{
-                if(response.data.length > 0){
-                    setFilms(response.data);
-                    setNotFound(false);
-                } else {
-                    setFilms([]);
-                    setNotFound(true);
-                }
-            }
+            getResponseAndSetFilms(response);
         });
     }
 
@@ -103,18 +71,7 @@ export default function Films_Result() {
         axios.get("http://localhost:3001/films/newReleases", {
             params: { }
         }).then((response) => {
-            if(response.data === null){
-                setNotFound(true);
-                console.log("Error! Film not found!"); 
-            } else{
-                if(response.data.length > 0){
-                    setFilms(response.data);
-                    setNotFound(false);
-                } else {
-                    setFilms([]);
-                    setNotFound(true);
-                }
-            }
+            getResponseAndSetFilms(response);
         });
     }
 
@@ -123,19 +80,27 @@ export default function Films_Result() {
         axios.get("http://localhost:3001/films/bestsellers", {
             params: { }
         }).then((response) => {
-            if(response.data === null){
-                setNotFound(true);
-                console.log("Error! Film not found!"); 
-            } else{
-                if(response.data.length > 0){
-                    setFilms(response.data);
-                    setNotFound(false);
-                } else {
-                    setFilms([]);
-                    setNotFound(true);
-                }
-            }
+            getResponseAndSetFilms(response);
         });
+    }
+
+     // used to manage response and set films to view
+     function getResponseAndSetFilms(response){
+        if(response.data === null){
+            setNotFound(true);
+            console.log("Error! Film not found!"); 
+        } else{
+            if(response.data.length > 0){
+                setFilms(response.data);
+                setNotFound(false);
+            } else {
+                setFilms([]);
+                setNotFound(true);
+            }
+        }
+
+        // interupt loading in each two case
+        setLoading(false);
     }
 
     function goToFilmPage(id){
@@ -161,29 +126,39 @@ export default function Films_Result() {
             );
     }
 
+    // used to show component or loading page
+    function showComponent(){
+        if(loading)
+            return <Loading />
+        else
+            return (
+                <div className="films_result" id="films_result">
+                    <div className="title-container">
+                        <div className="title-name">{param}</div>
+                    </div>
+                    <div className="container">
+                        {films.map((d, key) => (
+                            <Link to={goToFilmPage(d.id)} key={key}>
+                                <div className="card">
+                                    <img src={d.locandina} />
+                                    <div className="info">
+                                        <div className="name">{d.nome}</div>
+                                        <div className="genere">{d.genere}</div>
+                                        {showPrice(d)}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className={"notFound " + (notFound && "active")}>
+                        <h1>Not found!</h1>
+                        <h3>Please retry...</h3>
+                    </div>
+                </div>
+                );
+    }
+
     return (
-        <div className="films_result" id="films_result">
-            <div className="title-container">
-                <div className="title-name">{param}</div>
-            </div>
-            <div className="container">
-                {films.map((d, key) => (
-                    <Link to={goToFilmPage(d.id)} key={key}>
-                        <div className="card">
-                            <img src={d.locandina} />
-                            <div className="info">
-                                <div className="name">{d.nome}</div>
-                                <div className="genere">{d.genere}</div>
-                                {showPrice(d)}
-                            </div>
-                        </div>
-                    </Link>
-                ))}
-            </div>
-            <div className={"notFound " + (notFound && "active")}>
-                <h1>Not found!</h1>
-                <h3>Please retry...</h3>
-            </div>
-        </div>
+        <div>{showComponent()}</div>
         );
 }
