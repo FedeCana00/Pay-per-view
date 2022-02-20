@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { type } from "../../../constants/typeSearch";
 import { useNavigate,useLocation } from 'react-router-dom';
 import { typeOfManagement } from "../filmManagement";
+import Footer from "../../footer/Footer";
 
 export default function Navbar() {
     const [showSearchBar, setShowSearchBar] = useState(false);
@@ -73,6 +74,7 @@ export default function Navbar() {
             </div>
 
             <Outlet />
+            <Footer/>
         </div>
     );
 }
