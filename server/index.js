@@ -519,6 +519,11 @@ app.get("/earnings/:id", (req, res) => {
   // close connection
   db.end();
 });
+// default url returns a presentation message
+app.get("/", (req, res) => {
+
+  res.send("This is the pay-per-view service!")
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
