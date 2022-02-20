@@ -6,6 +6,7 @@ import { generes } from "./genere";
 import { useState } from "react";
 import { type } from "../../constants/typeSearch";
 import { useNavigate } from 'react-router-dom';
+import Footer from "../footer/Footer";
 
 export default function Navbar() {
     const [showGeneres, setShowGeneres] = useState(false);
@@ -87,6 +88,7 @@ export default function Navbar() {
             </div>
 
             <Outlet />
+            <Footer/>
         </div>
     );
 }
