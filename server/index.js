@@ -34,6 +34,7 @@ app.post("/createPerson", (req, res) => {
         console.log(err);
       } else {
         res.send("Person inserted into DB!");
+        console.log("User sign up successfully!");
       }
     });
 
@@ -69,6 +70,7 @@ app.get("/login", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        console.log("User login successfully!");
       }
     });
 
@@ -103,6 +105,7 @@ app.get("/film", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        console.log("Films get successfully!");
       }
     });
 
@@ -121,6 +124,7 @@ app.get("/userinventory", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        console.log("User's films get successfully!");
       }
     });
 
@@ -139,6 +143,7 @@ app.get("/films/bestsellers", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        console.log("Best sellers get successfully!");
       }
     });
 
@@ -156,6 +161,7 @@ app.get("/films/genere", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        console.log("Film genere get successfully!");
       }
     });
 
@@ -173,6 +179,7 @@ app.get("/films/searchName", (req, res) => {
         console.log(err);
       } else {
         res.send(result);
+        console.log("Films search by name successfully!");
       }
     });
 
@@ -190,6 +197,7 @@ app.get("/films/searchAll", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Get all films successfully!");
     }
   });
 
@@ -207,6 +215,7 @@ app.get("/films/newReleases", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Films new releases successfully!");
     }
   });
 
@@ -228,6 +237,7 @@ app.post('/payment',(req,res)=>{
     } else {
       res.status(201);
       res.send("Transaction inserted into DB!");
+      console.log("Payment successfully!");
     }
   })
   db.end();
@@ -261,7 +271,8 @@ app.get("/getfile",(req,res)=>{
       } else {
         Object.keys(result).forEach(function(key) {
           var row = result[key];
-          res.download(row.file)
+          res.download(row.file);
+          console.log("Download film successfully!");
         });
       }
     });
@@ -283,6 +294,7 @@ app.get("/sales", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Get all sales successfully!");
     }
   });
 
@@ -313,6 +325,7 @@ app.post('/film/add',(req,res)=>{
     else {
       res.status(201);
       res.send("Transaction inserted into DB!");
+      console.log("Insert new film successfully!");
     }
   })
   // close connection to database
@@ -416,6 +429,7 @@ app.delete('/film/delete/:id',(req,res)=>{
       console.log(err);
     } else {
       res.send(result);
+      console.log("Delete film successfully!");
     }
   });
   // close connection to database
@@ -435,6 +449,7 @@ app.get("/update/:id", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Get last film edit successfully!");
     }
   });
 
@@ -456,6 +471,7 @@ app.post("/update/:id/:discount", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Set discount of film successfully!");
     }
   });
 
@@ -476,6 +492,7 @@ app.get("/sales/:id", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Get number of films bought successfully!");
     }
   });
 
@@ -496,6 +513,7 @@ app.get("/earnings/:id", (req, res) => {
       console.log(err);
     } else {
       res.send(result);
+      console.log("Get earning of film successfully!");
     }
   });
 
