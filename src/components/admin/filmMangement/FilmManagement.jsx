@@ -13,7 +13,7 @@ export default function FilmManagement() {
     const navigate = useNavigate();
     // variables
     const [name, setName] = useState("");
-    const [genere, setGenere] = useState("");
+    const [genere, setGenere] = useState("Animation");
     const [plot, setPlot] = useState("");
     const [date, setDate] = useState("");
     const [price, setPrice] = useState(0.0);
