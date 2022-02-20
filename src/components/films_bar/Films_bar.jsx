@@ -23,27 +23,27 @@ export default function Films_bar({show}) {
             case generes[1].name:
                 getGenere(generes[1].name);
                 setTypeSearch(type[0].name);
-                setParam(generes[0].name);
+                setParam(generes[1].name);
                 break;
             case generes[2].name:
                 getGenere(generes[2].name);
                 setTypeSearch(type[0].name);
-                setParam(generes[0].name);
+                setParam(generes[2].name);
                 break;
             case generes[3].name:
                 getGenere(generes[3].name);
                 setTypeSearch(type[0].name);
-                setParam(generes[0].name);
+                setParam(generes[3].name);
                 break;
             case generes[4].name:
                 getGenere(generes[4].name);
                 setTypeSearch(type[0].name);
-                setParam(generes[0].name);
+                setParam(generes[4].name);
                 break;
             case generes[5].name:
                 getGenere(generes[5].name);
                 setTypeSearch(type[0].name);
-                setParam(generes[0].name);
+                setParam(generes[5].name);
                 break;
            case specialsGenere[0].name:
                getNewReleases();
